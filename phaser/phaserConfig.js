@@ -4,8 +4,8 @@ import { chapter0 } from './scenes/chapter0.js';
 
 const config = {
     type: Phaser.AUTO,
-    width: 640,
-    height: 360,
+    width: 768,
+    height: 432,
     physics: {
         default: 'arcade',
         arcade: {

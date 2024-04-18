@@ -8,8 +8,8 @@ export class opening extends Phaser.Scene {
     }
     create() {
         this.add.rectangle(0, 0, this.game.config.width, this.game.config.height, 0x333399).setOrigin(0);
-        const incir = this.add.image(150, 100, 'incir').setScale(0.1);
-        const gamedevjs = this.add.image(450, 100, 'gamedevjs').setScale(0.1);
+        const incir = this.add.image(150, 200, 'incir').setScale(0.1);
+        const gamedevjs = this.add.image(550, 200, 'gamedevjs').setScale(0.1);
 
         this.tweens.add({
             targets: [incir,gamedevjs],
