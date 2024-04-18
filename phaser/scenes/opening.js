@@ -4,22 +4,24 @@ export class opening extends Phaser.Scene {
     }
     preload() {
         this.load.image('incir', 'assets/logos/incir.png');
-        this.load.image('gamedevjs', 'assets/logos/gamedevjs.png');
+        //this.load.image('gamedevjs', 'assets/logos/gamedevjs.png');
+        this.load.image('jam24', 'assets/logos/jam24.png');
     }
     create() {
-        this.add.rectangle(0, 0, this.game.config.width, this.game.config.height, 0x333399).setOrigin(0);
-        const incir = this.add.image(150, 200, 'incir').setScale(0.1);
-        const gamedevjs = this.add.image(550, 200, 'gamedevjs').setScale(0.1);
+
+        this.jam24 = this.add.image(-50, -10, 'jam24').setOrigin(0);
+        this.incir = this.add.image(200, 300, 'incir').setScale(0.1);
+        //this.gamedevjs = this.add.image(550, 200, 'gamedevjs').setScale(0.1);
 
         this.tweens.add({
-            targets: [incir,gamedevjs],
-            scaleX: 2,
-            scaleY: 2,
+            targets: [this.incir, this.gamedevjs],
+            scaleX: 3,
+            scaleY: 3,
             angle: 360,
-            duration: 800,
+            duration: 1000,
             ease: 'Cubic.InOut',
             onComplete: () => {
-                this.time.delayedCall(500, () => {
+                this.time.delayedCall(1000, () => {
                     this.scene.start('menu');
                 });
             }
