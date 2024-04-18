@@ -1,0 +1,31 @@
+export class chapter0 extends Phaser.Scene {
+    constructor() {
+        super({ key: 'chapter0' });
+    }
+    preload() {
+        this.load.spritesheet('alset', 'assets//characters/alset/idle13x18.png', { frameWidth: 13, frameHeight: 18 });
+        this.load.spritesheet('mom', 'assets//characters/mom/idle14x19.png', { frameWidth: 14, frameHeight: 19 });
+        // this.load.image("roomTileSet", "assets/maps/room/tileset.png");
+        // this.load.tilemapTiledJSON('roomTilemap', "assets/maps/room/tilemap.json");
+    }
+    create() {
+        this.alset = this.physics.add.sprite(200, 100, 'alset');
+        this.mom = this.physics.add.sprite(150, 100, 'mom');
+        this.anims.create({
+            key:'alsetIdle',
+            frames:this.anims.generateFrameNumbers('alset', {start:0 , end:4}),
+            frameRate: 5,
+        });
+        this.anims.create({
+            key:'momIdle',
+            frames:this.anims.generateFrameNumbers('mom', {start:0 , end:4}),
+            frameRate: 5,
+        });
+        this.cameras.main.setZoom(2);
+        this.cameras.main.startFollow(this.alset);
+    }
+    update() {
+        this.alset.anims.play('alsetIdle',true);
+        this.mom.anims.play('momIdle',true);
+    }
+}
