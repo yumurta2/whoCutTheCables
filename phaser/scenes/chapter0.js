@@ -13,7 +13,7 @@ export class chapter0 extends Phaser.Scene {
         this.mom = this.physics.add.sprite(150, 100, 'mom');
         this.anims.create({
             key:'alsetIdle',
-            frames:this.anims.generateFrameNumbers('alset', {start:0 , end:4}),
+            frames:this.anims.generateFrameNumbers('alset', {start:0 , end:7}),
             frameRate: 5,
         });
         this.anims.create({
@@ -24,7 +24,7 @@ export class chapter0 extends Phaser.Scene {
         this.cameras.main.setZoom(2);
         this.cameras.main.startFollow(this.alset);
     }
-    update() {
+    update() {  
         this.alset.anims.play('alsetIdle',true);
         this.mom.anims.play('momIdle',true);
     }
