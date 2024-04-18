@@ -4,7 +4,7 @@ export class chapter0 extends Phaser.Scene {
     }
     preload() {
         this.load.spritesheet('alset', 'assets//characters/alset/idle32x64.png', { frameWidth: 32, frameHeight: 64 });
-        this.load.spritesheet('mom', 'assets//characters/mom/idle14x19.png', { frameWidth: 14, frameHeight: 19 });
+        this.load.spritesheet('mom', 'assets//characters/mom/momidle32x64.png', { frameWidth: 32, frameHeight: 64 });
         // this.load.image("roomTileSet", "assets/maps/room/tileset.png");
         // this.load.tilemapTiledJSON('roomTilemap', "assets/maps/room/tilemap.json");
     }
@@ -18,7 +18,7 @@ export class chapter0 extends Phaser.Scene {
         });
         this.anims.create({
             key:'momIdle',
-            frames:this.anims.generateFrameNumbers('mom', {start:0 , end:4}),
+            frames:this.anims.generateFrameNumbers('mom', {start:0 , end:6}),
             frameRate: 5,
         });
         this.cameras.main.setZoom(2);
