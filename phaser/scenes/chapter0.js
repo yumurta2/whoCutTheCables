@@ -49,42 +49,27 @@ update() {
         this.textArr[1] = true;
         switch(this.textArr[0]){
             case 1:
-                this.text.setText('Alset: Z').setPosition(this.alset.x - 50, this.alset.y - 50);
+                this.text.setText('Alset: ZzZz').setPosition(this.alset.x - 50, this.alset.y - 50);
                 break;
             case 2:
-                this.text.setText('Alset: Zz');
-                break;
-            case 3:
-                this.text.setText('Alset: ZzZ');
-                break;
-            case 4:
-                this.text.setText('Alset: ZzZz');
-                break;
-            case 5:
-                this.text.setText('Alset: ZzZz .');
-                break;
-            case 6:
-                this.text.setText('Alset: ZzZz . .');
-                break;
-            case 7:
                 this.text.setText('Alset: ZzZz . . .');
                 break;
-            case 8:
+            case 3:
                 this.text.setText('Mom: Alset Wake Up!').setPosition(this.mom.x - 100, this.mom.y - 50);
                 break;
-            case 9:
+            case 4:
                 this.text.setText('Alset: What is happening ?!').setPosition(this.alset.x - 50, this.alset.y - 50);
                 this.sound.play('ampulAc');
                 this.darkenOverlay.setDepth(-1); 
                 this.isBulb = true;
                 break;
-            case 10:
+            case 5:
                 this.text.setText('Mom: Something is wrong with electrics').setPosition(this.mom.x - 200, this.mom.y - 50);
                 break;
-            case 11:
+            case 6:
                 this.text.setText('Alset: Close the lights !').setPosition(this.alset.x - 50, this.alset.y - 50);
                 break;
-            case 12:
+            case 7:
                 this.sound.play('ampulPat');
                 this.text.setText('Alset: Too late . . .').setPosition(this.alset.x - 50, this.alset.y - 50);
                 this.isBulb = false;
