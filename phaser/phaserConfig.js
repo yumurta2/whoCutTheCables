@@ -1,6 +1,7 @@
 import { opening } from './scenes/opening.js';
 import { menu } from './scenes/menu.js';
 import { chapter0 } from './scenes/chapter0.js';
+import { chapter1 } from './scenes/chapter1.js';
 
 const config = {
     type: Phaser.AUTO,
@@ -9,21 +10,25 @@ const config = {
     physics: {
         default: 'arcade',
         arcade: {
-            gravity: { y: 0 }, // Top down game, so no gravity
+            gravity: { y: 0 },
             debug: false
         }
     },
-    scene: [opening,menu,chapter0],
+    scene: [opening,menu,chapter0,chapter1],
     audio: {
-        disableWebAudio: true, // In case of issues with Web Audio, set it to true
-        noAudio: false, // Ensure audio is not disabled
-        muted: false // Unmute audio
+        disableWebAudio: true,
+        noAudio: false,
+        muted: false
     },
     pixelArt: true,
     render: {
         antialias: false,
         pixelArt: true,
         roundPixels: true
+    },
+    fps: {
+        target: 144,
+        forceSetTimeOut: true
     }
 };
 
