@@ -14,7 +14,7 @@ const config = {
             debug: false
         }
     },
-    scene: [opening,menu,chapter0,chapter1],
+    scene: [chapter1,opening,menu,chapter0],
     audio: {
         disableWebAudio: true,
         noAudio: false,

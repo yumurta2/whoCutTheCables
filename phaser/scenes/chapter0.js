@@ -76,6 +76,12 @@ update() {
                 this.brighteningCircle.clear();
                 this.darkenOverlay.setDepth(10);
                 break;
+            case 8:
+                this.text.setText('Mom: get this flashlight').setPosition(this.mom.x - 200, this.mom.y - 50);
+                break;
+            case 9:
+                this.scene.start('chapter1');
+                break;
         }
     }
     this.alset.anims.play('alsetIdle',true);
