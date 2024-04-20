@@ -6,8 +6,8 @@ export class chapter0 extends Phaser.Scene {
         this.load.spritesheet('alset', 'assets//characters/alset/idle32x64.png', { frameWidth: 32, frameHeight: 64 });
         this.load.spritesheet('mom', 'assets/characters/mom/momidle32x64.png', { frameWidth: 32, frameHeight: 64 });
         this.load.image('bulb', 'assets/objects/sk_kapal.png');
-        this.load.audio('ampulAc', 'assets/ampulAc.wav');
-        this.load.audio('ampulPat', 'assets/ampulPat.wav');
+        this.load.audio('ampulAc', 'assets/sounds/ampulAc.wav');
+        this.load.audio('ampulPat', 'assets/sounds/ampulPat.wav');
         // this.load.image("roomTileSet", "assets/maps/room/tileset.png");
         // this.load.tilemapTiledJSON('roomTilemap', "assets/maps/room/tilemap.json");
     }
