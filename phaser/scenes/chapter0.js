@@ -41,6 +41,7 @@ export class chapter0 extends Phaser.Scene {
         this.brighteningColor = 0xffffaa;
         this.radiusMultiplier = 200;
         this.isBulb = false;
+        this.brighteningAlpha = 0.1;
     }
 update() {  
     if(Phaser.Input.Keyboard.JustDown(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE))){
@@ -79,7 +80,7 @@ update() {
                 this.text.setText('Alset: Too late . . .').setPosition(this.alset.x - 50, this.alset.y - 50);
                 this.radiusMultiplier = 20;
                 this.brighteningColor = 0xffaa33;
-
+                this.brighteningAlpha = 0.02;
                 this.darkenOverlay.setDepth(10);
                 break;
             case 8:
@@ -94,7 +95,7 @@ update() {
     this.mom.anims.play('momIdle',true);
     if(this.isBulb == true){
         this.brighteningCircle.clear()
-        this.brighteningCircle.fillStyle(this.brighteningColor, 0.1);
+        this.brighteningCircle.fillStyle(this.brighteningColor, this.brighteningAlpha);
         for(const radius in this.brighteningRadius){
 
            this.brighteningRadius[radius] = Math.ceil(Math.random()*this.radiusMultiplier);
