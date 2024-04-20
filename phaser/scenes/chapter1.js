@@ -3,19 +3,27 @@ export class chapter1 extends Phaser.Scene {
         super({ key: 'chapter1' });
     }
     preload() {
-        this.load.spritesheet('alsetIdle', 'assets//characters/alset/idle32x64.png', { frameWidth: 32, frameHeight: 64 });
+        this.load.spritesheet('alsetIdleRight', 'assets//characters/alset/idle32x64right.png', { frameWidth: 32, frameHeight: 64 });
+        this.load.spritesheet('alsetIdleLeft', 'assets//characters/alset/idle32x64left.png', { frameWidth: 32, frameHeight: 64 });
         this.load.spritesheet('alsetRight', 'assets//characters/alset/right32x64.png', { frameWidth: 32, frameHeight: 64 });
         this.load.spritesheet('alsetLeft', 'assets//characters/alset/left32x64.png', { frameWidth: 32, frameHeight: 64 });
         this.load.spritesheet('mom', 'assets/characters/mom/momidle32x64.png', { frameWidth: 32, frameHeight: 64 });
+        this.load.image('mercek', 'assets/mercek.png');
         // this.load.image("roomTileSet", "assets/maps/room/tileset.png");
         // this.load.tilemapTiledJSON('roomTilemap', "assets/maps/room/tilemap.json");
     }
     create() {
-        this.alset = this.physics.add.sprite(100, 300, 'alset');
-        this.mom = this.physics.add.sprite(500, 300, 'mom');
+        this.game.canvas.style.cursor = "none";
+        this.alset = this.physics.add.sprite(100, 300, 'alsetIdleRight').setDepth(3);
+        this.mom = this.physics.add.sprite(500, 300, 'mom').setDepth(2);
         this.anims.create({
-            key:'alsetIdle',
-            frames:this.anims.generateFrameNumbers('alsetIdle', {start:0 , end:7}),
+            key:'alsetIdleRight',
+            frames:this.anims.generateFrameNumbers('alsetIdleRight', {start:0 , end:7}),
+            frameRate: 7,
+        });
+        this.anims.create({
+            key:'alsetIdleLeft',
+            frames:this.anims.generateFrameNumbers('alsetIdleLeft', {start:0 , end:7}),
             frameRate: 7,
         });
         this.anims.create({
@@ -34,21 +42,32 @@ export class chapter1 extends Phaser.Scene {
             frameRate: 7,
         });
         this.cameras.main.setZoom(1);
+        this.alset.lastAnim = null;
+        this.mercek = this.add.image(0, 0, 'mercek').setDepth(31);
         //this.cameras.main.startFollow(this.alset);
+
     }
-    update() {  
+    update() { 
+        this.mercek.x = this.input.activePointer.x;
+        this.mercek.y = this.input.activePointer.y;
         if(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D).isDown && !this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A).isDown){
             this.alset.anims.play('alsetRight',true);
             this.alset.x += 1;
+            this.alset.lastAnim = 'alsetRight';
         }
         if(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A).isDown && !this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D).isDown){
             this.alset.anims.play('alsetLeft',true);
             this.alset.x -= 1;
+            this.alset.lastAnim = 'alsetLeft';
         }
-        if(!this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A).isDown && !this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D).isDown){
-            this.alset.anims.play('alsetIdle',true);
+        if(!this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A).isDown && !this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D).isDown || this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A).isDown && this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D).isDown){
+            if(this.alset.lastAnim === 'alsetRight'){
+                this.alset.anims.play('alsetIdleRight',true);
+            }
+            if(this.alset.lastAnim === 'alsetLeft'){
+                this.alset.anims.play('alsetIdleLeft',true);
+            } 
         }
-
         this.mom.anims.play('momIdle',true);
     }
 }

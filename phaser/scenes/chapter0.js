@@ -3,9 +3,10 @@ export class chapter0 extends Phaser.Scene {
         super({ key: 'chapter0' });
     }
     preload() {
-        this.load.spritesheet('alset', 'assets//characters/alset/idle32x64.png', { frameWidth: 32, frameHeight: 64 });
+        this.load.spritesheet('alsetIdleRight', 'assets//characters/alset/idle32x64right.png', { frameWidth: 32, frameHeight: 64 });
         this.load.spritesheet('mom', 'assets/characters/mom/momidle32x64.png', { frameWidth: 32, frameHeight: 64 });
         this.load.image('bulb', 'assets/objects/sk_kapal.png');
+        this.load.image('bulbK', 'assets/objects/sk_kirik.png');
         this.load.audio('ampulAc', 'assets/sounds/ampulAc.wav');
         this.load.audio('ampulPat', 'assets/sounds/ampulPat.wav');
         // this.load.image("roomTileSet", "assets/maps/room/tileset.png");
@@ -17,12 +18,12 @@ export class chapter0 extends Phaser.Scene {
         this.darkenOverlay.fillStyle(0x000000, 0.8); 
         this.darkenOverlay.fillRect(0, 0, this.game.config.width, this.game.config.height);
         this.darkenOverlay.setDepth(5); 
-        this.alset = this.physics.add.sprite(250, 200, 'alset');
+        this.alset = this.physics.add.sprite(250, 200, 'alsetIdleRight');
         this.mom = this.physics.add.sprite(500, 200, 'mom');
         this.textArr=[0,false];
         this.anims.create({
             key:'alsetIdle',
-            frames:this.anims.generateFrameNumbers('alset', {start:0 , end:7}),
+            frames:this.anims.generateFrameNumbers('alsetIdleRight', {start:0 , end:7}),
             frameRate: 5,
         });
         this.anims.create({
@@ -35,8 +36,10 @@ export class chapter0 extends Phaser.Scene {
         this.text = this.add.text(-600, -600, '-', { fill: '#ffffff', fontSize: '11px' });
         this.text.setDepth(10);
         this.brighteningCircle = this.add.graphics();
-        this.brighteningRadius = [25,50,75,100]; 
+        this.brighteningCircle.setDepth(15);
+        this.brighteningRadius = [25,26,27,28,29,30,31,32,33,34,35]; 
         this.brighteningColor = 0xffffaa;
+        this.radiusMultiplier = 200;
         this.isBulb = false;
     }
 update() {  
@@ -70,10 +73,13 @@ update() {
                 this.text.setText('Alset: Close the lights !').setPosition(this.alset.x - 50, this.alset.y - 50);
                 break;
             case 7:
+                this.bulb.destroy();
+                this.bulb = this.add.image(350, 150, 'bulbK');
                 this.sound.play('ampulPat');
                 this.text.setText('Alset: Too late . . .').setPosition(this.alset.x - 50, this.alset.y - 50);
-                this.isBulb = false;
-                this.brighteningCircle.clear();
+                this.radiusMultiplier = 20;
+                this.brighteningColor = 0xffaa33;
+
                 this.darkenOverlay.setDepth(10);
                 break;
             case 8:
@@ -87,20 +93,12 @@ update() {
     this.alset.anims.play('alsetIdle',true);
     this.mom.anims.play('momIdle',true);
     if(this.isBulb == true){
-        this.brighteningCircle.fillStyle(this.brighteningColor, 0.01);
+        this.brighteningCircle.clear()
+        this.brighteningCircle.fillStyle(this.brighteningColor, 0.1);
         for(const radius in this.brighteningRadius){
-            if(3%radius==0){
-                this.x = 350 - radius;
-                this.y = 150 - radius;
-                this.brighteningColor = 0xffffaa;
-            }
-            else{
-                this.brighteningColor = 0xffffff;
-                this.x = 350 + radius;
-                this.y = 150 + radius;
-            }
-           this.brighteningRadius[radius] = Math.ceil(Math.random()*200);
-           this.brighteningCircle.fillCircle(this.x, this.y, this.brighteningRadius[radius]);
+
+           this.brighteningRadius[radius] = Math.ceil(Math.random()*this.radiusMultiplier);
+           this.brighteningCircle.fillCircle(350, 150, this.brighteningRadius[radius]);
         }
     }
 }
