@@ -16,7 +16,7 @@ export class chapter1 extends Phaser.Scene {
     create() {
 
         this.corridor = this.add.image(300, 100, 'corridor').setDepth(1);
-        //this.game.canvas.style.cursor = "none";
+        this.game.canvas.style.cursor = "none";
         this.alset = this.physics.add.sprite(100, 200, 'alsetIdleRight').setDepth(3);
         this.mom = this.physics.add.sprite(500, 200, 'mom').setDepth(2);
         this.anims.create({
