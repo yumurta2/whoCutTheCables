@@ -9,13 +9,15 @@ export class chapter1 extends Phaser.Scene {
         this.load.spritesheet('alsetLeft', 'assets//characters/alset/left32x64.png', { frameWidth: 32, frameHeight: 64 });
         this.load.spritesheet('mom', 'assets/characters/mom/momidle32x64.png', { frameWidth: 32, frameHeight: 64 });
         this.load.image('mercek', 'assets/mercek.png');
+        this.load.image('corridor', 'assets/maps/corridor/corridor.png');
         // this.load.image("roomTileSet", "assets/maps/room/tileset.png");
         // this.load.tilemapTiledJSON('roomTilemap', "assets/maps/room/tilemap.json");
     }
     create() {
+        this.corridor = this.add.image(400, 100, 'corridor').setDepth(1);
         this.game.canvas.style.cursor = "none";
-        this.alset = this.physics.add.sprite(100, 300, 'alsetIdleRight').setDepth(3);
-        this.mom = this.physics.add.sprite(500, 300, 'mom').setDepth(2);
+        this.alset = this.physics.add.sprite(100, 200, 'alsetIdleRight').setDepth(3);
+        this.mom = this.physics.add.sprite(500, 200, 'mom').setDepth(2);
         this.anims.create({
             key:'alsetIdleRight',
             frames:this.anims.generateFrameNumbers('alsetIdleRight', {start:0 , end:7}),
@@ -43,13 +45,13 @@ export class chapter1 extends Phaser.Scene {
         });
         this.cameras.main.setZoom(1);
         this.alset.lastAnim = null;
-        this.mercek = this.add.image(0, 0, 'mercek').setDepth(31);
+        // this.mercek = this.add.image(0, 0, 'mercek').setDepth(31);
         //this.cameras.main.startFollow(this.alset);
 
     }
     update() { 
-        this.mercek.x = this.input.activePointer.x;
-        this.mercek.y = this.input.activePointer.y;
+        // this.mercek.x = this.input.activePointer.x;
+        // this.mercek.y = this.input.activePointer.y;
         if(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D).isDown && !this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A).isDown){
             this.alset.anims.play('alsetRight',true);
             this.alset.x += 1;
