@@ -14,7 +14,8 @@ export class chapter1 extends Phaser.Scene {
         // this.load.tilemapTiledJSON('roomTilemap', "assets/maps/room/tilemap.json");
     }
     create() {
-        this.corridor = this.add.image(400, 100, 'corridor').setDepth(1);
+
+        this.corridor = this.add.image(300, 100, 'corridor').setDepth(1);
         //this.game.canvas.style.cursor = "none";
         this.alset = this.physics.add.sprite(100, 200, 'alsetIdleRight').setDepth(3);
         this.mom = this.physics.add.sprite(500, 200, 'mom').setDepth(2);
@@ -45,9 +46,17 @@ export class chapter1 extends Phaser.Scene {
         });
         this.cameras.main.setZoom(1);
         this.alset.lastAnim = null;
-         this.mercek = this.add.image(0, 0, 'mercek').setDepth(31);
+        this.mercek = this.add.image(0, 0, 'mercek').setDepth(31);
         this.cameras.main.startFollow(this.alset);
+        
+        this.leftWall = this.add.rectangle(0, 200, 50, 150, 0xffffff, 0.5).setDepth(3);
 
+        this.physics.add.existing(this.leftWall);
+        this.physics.add.existing(this.alset);
+        
+        this.physics.add.collider(this.alset, this.leftWall);
+
+        //this.physics.world.setBounds(0, 0, 20000, 20000);
     }
     update() { 
         //this.cameras.main.midPoint.x this.cameras.main.midPoint.y
