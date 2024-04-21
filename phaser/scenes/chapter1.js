@@ -15,7 +15,7 @@ export class chapter1 extends Phaser.Scene {
     }
     create() {
         this.corridor = this.add.image(400, 100, 'corridor').setDepth(1);
-        this.game.canvas.style.cursor = "none";
+        //this.game.canvas.style.cursor = "none";
         this.alset = this.physics.add.sprite(100, 200, 'alsetIdleRight').setDepth(3);
         this.mom = this.physics.add.sprite(500, 200, 'mom').setDepth(2);
         this.anims.create({
@@ -45,13 +45,14 @@ export class chapter1 extends Phaser.Scene {
         });
         this.cameras.main.setZoom(1);
         this.alset.lastAnim = null;
-        // this.mercek = this.add.image(0, 0, 'mercek').setDepth(31);
-        //this.cameras.main.startFollow(this.alset);
+         this.mercek = this.add.image(0, 0, 'mercek').setDepth(31);
+        this.cameras.main.startFollow(this.alset);
 
     }
     update() { 
-        // this.mercek.x = this.input.activePointer.x;
-        // this.mercek.y = this.input.activePointer.y;
+        //this.cameras.main.midPoint.x this.cameras.main.midPoint.y
+        this.mercek.x = this.input.activePointer.x + this.alset.x -384;
+         this.mercek.y = this.input.activePointer.y + this.alset.y -215;
         if(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D).isDown && !this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A).isDown){
             this.alset.anims.play('alsetRight',true);
             this.alset.x += 1;
