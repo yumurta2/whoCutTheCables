@@ -43,7 +43,7 @@ export class chapter0 extends Phaser.Scene {
         });
         this.cameras.main.setZoom(1);
         //this.cameras.main.startFollow(this.alset);
-        this.text = this.add.text(-600, -600, '', { fill: '#ffffff', fontSize: '18px' });
+        this.text = this.add.text(230, 300, '', { fill: '#ffffff', fontSize: '18px' });
         this.text.setDepth(14);
         this.brighteningCircle = this.add.graphics();
         this.brighteningCircle.setDepth(12);

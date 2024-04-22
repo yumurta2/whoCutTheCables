@@ -22,7 +22,7 @@ export class chapter1 extends Phaser.Scene {
         this.game.canvas.style.cursor = "none";
         this.alset = this.physics.add.sprite(100, 200, 'alsetIdleRight').setDepth(3);
         this.alset.setCollideWorldBounds(true);
-        this.mom = this.physics.add.sprite(500, 200, 'mom').setDepth(2);
+        this.mom = this.physics.add.sprite(300, 200, 'mom').setDepth(2);
         this.leftWall.setImmovable(true);
         this.physics.add.collider(this.alset, this.leftWall);
         this.anims.create({
@@ -52,17 +52,24 @@ export class chapter1 extends Phaser.Scene {
         });
         this.cameras.main.setZoom(1);
         this.alset.lastAnim = null;
-        this.mercek = this.add.image(0, 0, 'mercek').setDepth(31);
+        this.mercek = this.add.image(0, 0, 'mercek').setDepth(13);
         this.cameras.main.startFollow(this.alset);
         this.mercek.setScale(2);
         this.brighteningCircle = [];
         this.brighteningCircle[0] = this.add.graphics();
         this.brighteningCircle[0].setDepth(12);
+        this.text = this.add.text(230, 300, '', { fill: '#ffffff', fontSize: '18px' }).setDepth(14);
+
         //this.brighteningCircle[1] = this.add.graphics();
         //this.brighteningCircle[1].setDepth(13);
         //this.physics.world.setBounds(0, 0, 20000, 20000);
     }
     update() { 
+        this.text.x = this.cameras.main.midPoint.x - 100;
+        this.text.y = this.cameras.main.midPoint.y +100 ;
+        this.text.setText('distance between\nalset and mom\n' + Phaser.Math.Distance.Between(this.alset.x, this.alset.y, this.mom.x, this.mom.y)).setPosition(this.text.x,this.text.y);
+
+
         //this.cameras.main.midPoint.x this.cameras.main.midPoint.y
         this.mercek.x = this.input.activePointer.x + this.alset.x -384;
         this.mercek.y = this.input.activePointer.y + this.alset.y -215;
