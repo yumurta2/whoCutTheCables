@@ -116,7 +116,7 @@ update() {
     this.alset.anims.play('alsetIdle',true);
     this.mom.anims.play('momIdle',true);
     if(this.isBulb == true){
-        this.brighteningCircle.clear()
+        this.brighteningCircle.clear();
         this.brighteningCircle.fillStyle(this.brighteningColor, this.brighteningAlpha);
         for(const radius in this.brighteningRadius){
 
