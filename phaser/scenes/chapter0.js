@@ -57,13 +57,15 @@ export class chapter0 extends Phaser.Scene {
     }
 update() {  
     if(Phaser.Input.Keyboard.JustDown(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE))){
-        console.log('space pressed');
         this.textArr[0] = this.textArr[0] + 1;
         this.textArr[1] = false;
     }
     if(this.textArr[1] == false){
         this.textArr[1] = true;
         switch(this.textArr[0]){
+            case 0:
+                this.text.setText('press SPACE to interact').setPosition(this.text.x,this.text.y);
+                break;
             case 1:
                 this.text.setText('Alset: ZzZz').setPosition(this.text.x,this.text.y);
                 break;

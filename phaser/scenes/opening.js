@@ -18,10 +18,10 @@ export class opening extends Phaser.Scene {
             scaleX: 3,
             scaleY: 3,
             angle: 360,
-            duration: 1000,
+            duration: 600,
             ease: 'Cubic.InOut',
             onComplete: () => {
-                this.time.delayedCall(1000, () => {
+                this.time.delayedCall(600, () => {
                     this.scene.start('menu');
                 });
             }
