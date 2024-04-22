@@ -10,7 +10,7 @@ export class chapter1 extends Phaser.Scene {
         this.load.image('invisWall', 'assets/invisWall.png');
         this.load.spritesheet('mom', 'assets/characters/mom/momidle32x64.png', { frameWidth: 32, frameHeight: 64 });
         this.load.image('mercek', 'assets/mercek.png');
-        this.load.image('corridor', 'assets/maps/corridor/corridor.png');
+        this.load.image('corridor', 'assets/maps/house/corridor.png');
         this.load.image('alsetP', 'assets/portraits/alset.png');
         this.load.image('momP', 'assets/portraits/mom.png');
         // this.load.image("roomTileSet", "assets/maps/room/tileset.png");
@@ -28,8 +28,8 @@ export class chapter1 extends Phaser.Scene {
         //this.brighteningCircle[1].setDepth(13);
     }
     create() {
-        this.alsetP = this.add.image(100, 250, 'alsetP').setDepth(-3);
-        this.momP = this.add.image(650, 250, 'momP').setDepth(-3);
+        this.alsetP = this.add.image(-1000, 250, 'alsetP').setDepth(-3);
+        this.momP = this.add.image(-1000, 250, 'momP').setDepth(-3);
         this.leftWall = this.physics.add.image(0, 160, 'invisWall');
         
         this.leftWall.setCollideWorldBounds(true);
@@ -126,6 +126,8 @@ export class chapter1 extends Phaser.Scene {
                 this.dialogWithMom = true;
                 this.text.setText('Alset: \n\n  Sorry mom..').setPosition(this.text.x,this.text.y);
                 this.momP.setDepth(-4);
+                this.momP.x = -1000;
+                this.alsetP.x = this.text.x-150;
                 this.alsetP.setDepth(14);
 
                 break;
@@ -133,6 +135,8 @@ export class chapter1 extends Phaser.Scene {
                 this.text.setText('').setPosition(this.text.x,this.text.y);
                 this.momP.setDepth(-4);
                 this.alsetP.setDepth(-4);
+                this.momP.x = -1000;
+                this.alsetP.x = -1000;
                 this.dialogWithMom = false;
                 this.momDialog = 0;
                 break;
@@ -142,6 +146,8 @@ export class chapter1 extends Phaser.Scene {
                 this.alsetP.setDepth(-4);
                 this.dialogWithMom = false;
                 this.momDialog = 0;
+                this.momP.x = -1000;
+                this.alsetP.x = -1000;
                 break;
         }
         
