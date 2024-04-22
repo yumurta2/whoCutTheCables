@@ -3,10 +3,13 @@ export class menu extends Phaser.Scene {
         super({ key: 'menu' });
     }
     preload() {
+        this.load.image('thumbnail', 'assets/thumbnails/thumbnail.png');
     }
     create() {
-        this.add.rectangle(0, 0, this.game.config.width, this.game.config.height, 0x2c3e50).setOrigin(0);
-        // Create interactive buttons
+        //this.add.rectangle(0, 0, this.game.config.width, this.game.config.height, 0x2c3e50).setOrigin(0);
+  
+
+        this.thumbnail = this.add.image(350, 250, 'thumbnail').setDepth(0);
         this.chapter0 = this.add.text(300, 50, 'chapter0', { fill: '#ffffff', fontSize: '24px' })
             .setInteractive()
             .on('pointerdown', () => {
