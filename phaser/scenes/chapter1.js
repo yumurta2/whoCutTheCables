@@ -107,7 +107,6 @@ export class chapter1 extends Phaser.Scene {
                 this.text.setText('Mom: \n\n  You are still here ?!').setPosition(this.text.x,this.text.y);
                 this.momP.x = this.text.x+450;
                 this.momP.y = this.text.y-100;
-                this.alsetP.x = this.text.x-150;
                 this.alsetP.y = this.text.y-100;
                 this.momP.setDepth(14);
                 break;
