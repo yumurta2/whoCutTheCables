@@ -9,6 +9,7 @@ export class chapter1 extends Phaser.Scene {
         this.load.spritesheet('alsetLeft', 'assets/characters/alset/left32x64.png', { frameWidth: 32, frameHeight: 64 });
         this.load.image('invisWall', 'assets/invisWall.png');
         this.load.spritesheet('mom', 'assets/characters/mom/momidle32x64.png', { frameWidth: 32, frameHeight: 64 });
+        this.load.spritesheet('momters', 'assets/characters/mom/momidle32x64ters.png', { frameWidth: 32, frameHeight: 64 });
         this.load.image('mercek', 'assets/mercek.png');
         this.load.image('corridor', 'assets/maps/house/corridor.png');
         this.load.image('livingRoomDoor', 'assets/maps/house/doors/livingRoomDoor.png');
@@ -77,6 +78,11 @@ export class chapter1 extends Phaser.Scene {
         this.anims.create({
             key:'momIdle',
             frames:this.anims.generateFrameNumbers('mom', {start:0 , end:6}),
+            frameRate: 8,
+        });
+        this.anims.create({
+            key:'momters',
+            frames:this.anims.generateFrameNumbers('momters', {start:0 , end:6}),
             frameRate: 8,
         });
 
@@ -195,15 +201,19 @@ export class chapter1 extends Phaser.Scene {
         this.mercek.y = this.input.activePointer.y + this.alset.y -215;
         this.brighteningCircle[0].clear();
         //this.brighteningCircle[1].clear();
-        this.slower = this.slower + 1 % 10;
-        if(this.slower % 11 == 0){
-            this.brighteningCircle[0].fillStyle(0x000000, Math.random());
-        }
+
+            this.brighteningCircle[0].fillStyle(0x000000, Math.random()*0.5);
+
 
         //this.brighteningCircle[1].fillStyle(0x000000, Math.floor(Math.random()*10)/10);
         this.brighteningCircle[0].fillCircle(this.mercek.x, this.mercek.y, 100);
         //this.brighteningCircle[1].fillCircle(this.mercek.x, this.mercek.y, 90);
-        this.mom.anims.play('momIdle',true);
+        if(this.alset.x > this.mom.x){
+            this.mom.anims.play('momters',true);
+        }else{
+            this.mom.anims.play('momIdle',true);
+        }
+
         this.electricEfect.anims.play('electricEfect',true);
         if(!this.dialogWithMom){
             this.updateMovement();
