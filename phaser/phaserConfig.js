@@ -5,6 +5,7 @@ import { chapter1 } from './scenes/chapter1.js';
 import { chapter2 } from './scenes/chapter2.js';
 import { chapter3 } from './scenes/chapter3.js';
 import { chapter4 } from './scenes/chapter4.js';
+import { chapter5 } from './scenes/chapter5.js';
 const config = {
     type: Phaser.AUTO,
     width: 768,
@@ -13,10 +14,10 @@ const config = {
         default: 'arcade',
         arcade: {
             gravity: { y: 0 },
-            debug: true
+            debug: false
         }
     },
-    scene: [opening,menu,chapter0,chapter1,chapter2,chapter3,chapter4],
+    scene: [opening,menu,chapter0,chapter1,chapter2,chapter3,chapter4,chapter5],
     audio: {
         disableWebAudio: true,
         noAudio: false,

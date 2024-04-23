@@ -10,7 +10,7 @@ export class chapter3 extends Phaser.Scene {
         this.load.image('invisWall', 'assets/invisWall.png');
         this.load.spritesheet('mom', 'assets/characters/mom/momidle32x64.png', { frameWidth: 32, frameHeight: 64 });
         this.load.image('mercek', 'assets/mercek.png');
-        this.load.image('kitchen', 'assets/maps/house/kitchen.png');
+        this.load.image('corridor', 'assets/maps/house/corridor.png');
         this.load.image('alsetP', 'assets/portraits/alset.png');
         this.load.image('momP', 'assets/portraits/mom.png');
         // this.load.image("roomTileSet", "assets/maps/room/tileset.png");
@@ -33,7 +33,7 @@ export class chapter3 extends Phaser.Scene {
         this.leftWall = this.physics.add.image(0, 160, 'invisWall');
         
         this.leftWall.setCollideWorldBounds(true);
-        this.kitchen = this.add.image(980, 150, 'kitchen').setDepth(1);
+        this.corridor = this.add.image(980, 150, 'corridor').setDepth(1);
         this.game.canvas.style.cursor = "none";
         this.alset = this.physics.add.sprite(100, 200, 'alsetIdleRight').setDepth(3);
         this.alset.setCollideWorldBounds(true);

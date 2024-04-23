@@ -1,6 +1,6 @@
-export class chapter1 extends Phaser.Scene {
+export class chapter5 extends Phaser.Scene {
     constructor() {
-        super({ key: 'chapter1' });
+        super({ key: 'chapter5' });
     }
     preload() {
         this.load.spritesheet('alsetIdleRight', 'assets/characters/alset/idle32x64right.png', { frameWidth: 32, frameHeight: 64 });
@@ -11,14 +11,9 @@ export class chapter1 extends Phaser.Scene {
         this.load.spritesheet('mom', 'assets/characters/mom/momidle32x64.png', { frameWidth: 32, frameHeight: 64 });
         this.load.image('mercek', 'assets/mercek.png');
         this.load.image('corridor', 'assets/maps/house/corridor.png');
-        this.load.image('livingRoomDoor', 'assets/maps/house/doors/livingRoomDoor.png');
-        this.load.image('kitchenDoor', 'assets/maps/house/doors/kitchenDoor.png');
         this.load.image('alsetP', 'assets/portraits/alset.png');
         this.load.image('momP', 'assets/portraits/mom.png');
-        this.load.image('powerBoxBroken', 'assets/objects/powerBoxBroken.png');
-        this.load.spritesheet('electricEfect', 'assets/objects/electricEfect19x29.png', { frameWidth: 19, frameHeight: 29 });
-        
-
+        this.load.image('powerBoxBroken', 'assets/objetpowerBoxBroken.png');
         // this.load.image("roomTileSet", "assets/maps/room/tileset.png");
         // this.load.tilemapTiledJSON('roomTilemap', "assets/maps/room/tilemap.json");
     }
@@ -37,23 +32,15 @@ export class chapter1 extends Phaser.Scene {
         this.alsetP = this.add.image(-1000, 250, 'alsetP').setDepth(-3);
         this.momP = this.add.image(-1000, 250, 'momP').setDepth(-3);
         this.leftWall = this.physics.add.image(0, 160, 'invisWall');
-        this.powerBoxBroken = this.add.image(1000, 150, 'powerBoxBroken').setDepth(2).setScale(3);
-        this.livingRoomDoor = this.add.image(600, 165, 'livingRoomDoor').setDepth(2);
-        this.kitchenDoor = this.add.image(1400, 165, 'kitchenDoor').setDepth(2);
-        this.electricEfect = this.physics.add.sprite(1000, 150, 'electricEfect').setDepth(14).setScale(3);
+        
         this.leftWall.setCollideWorldBounds(true);
         this.corridor = this.add.image(980, 150, 'corridor').setDepth(1);
         this.game.canvas.style.cursor = "none";
-        this.alset = this.physics.add.sprite(100, 200, 'alsetIdleRight').setDepth(4);
+        this.alset = this.physics.add.sprite(100, 200, 'alsetIdleRight').setDepth(3);
         this.alset.setCollideWorldBounds(true);
-        this.mom = this.physics.add.sprite(300, 200, 'mom').setDepth(4);
+        this.mom = this.physics.add.sprite(300, 200, 'mom').setDepth(2);
         this.leftWall.setImmovable(true);
         this.physics.add.collider(this.alset, this.leftWall);
-        this.anims.create({
-            key:'electricEfect',
-            frames:this.anims.generateFrameNumbers('electricEfect', {start:0 , end:9}),
-            frameRate: 8,
-        });
         this.anims.create({
             key:'alsetIdleRight',
             frames:this.anims.generateFrameNumbers('alsetIdleRight', {start:0 , end:7}),
@@ -113,7 +100,7 @@ export class chapter1 extends Phaser.Scene {
     updateMomDialog(){
         switch(this.momDialog){
             case 0:
-                this.text.setText('press SPACE to talk with mom').setPosition(this.text.x,this.text.y);
+                this.text.setText('press SPACE to interact').setPosition(this.text.x,this.text.y);
                 this.dialogWithMom = false;
                 break;
             case 1:
@@ -177,17 +164,7 @@ export class chapter1 extends Phaser.Scene {
                 this.dialogWithMom = true;
                 this.momDialog = this.momDialog + 1;
             }
-        }else if(Phaser.Math.Distance.Between(this.alset.x, this.alset.y, this.powerBoxBroken.x, this.powerBoxBroken.y) < 70){
-            this.text.setText('press SPACE to interact with Broken Power Box').setPosition(this.text.x,this.text.y);
-
-        }else if(Phaser.Math.Distance.Between(this.alset.x, this.alset.y, this.livingRoomDoor.x, this.livingRoomDoor.y) < 50){
-            this.text.setText('press SPACE to go livingroom').setPosition(this.text.x,this.text.y);
-
-        }
-        else if(Phaser.Math.Distance.Between(this.alset.x, this.alset.y, this.kitchenDoor.x, this.kitchenDoor.y) < 50){
-            this.text.setText('press SPACE to go kitchen').setPosition(this.text.x,this.text.y);
-        }
-        else{
+        }else{
             this.text.setText('').setPosition(this.text.x,this.text.y);
         }
         //this.cameras.main.midPoint.x this.cameras.main.midPoint.y
@@ -204,7 +181,6 @@ export class chapter1 extends Phaser.Scene {
         this.brighteningCircle[0].fillCircle(this.mercek.x, this.mercek.y, 100);
         //this.brighteningCircle[1].fillCircle(this.mercek.x, this.mercek.y, 90);
         this.mom.anims.play('momIdle',true);
-        this.electricEfect.anims.play('electricEfect',true);
         if(!this.dialogWithMom){
             this.updateMovement();
         }
