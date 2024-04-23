@@ -24,6 +24,27 @@ export class menu extends Phaser.Scene {
             })
             .on('pointerover', () => this.chapter1.setBackgroundColor('#ff0000'))
             .on('pointerout', () => this.chapter1.setBackgroundColor(''));
+        this.chapter2 = this.add.text(300, 150, 'chapter2', { fill: '#ffffff', fontSize: '24px' })
+            .setInteractive()
+            .on('pointerdown', () => {
+                this.scene.start('chapter2');
+            })
+            .on('pointerover', () => this.chapter2.setBackgroundColor('#ff0000'))
+            .on('pointerout', () => this.chapter2.setBackgroundColor(''));
+        this.chapter3 = this.add.text(300, 200, 'chapter3', { fill: '#ffffff', fontSize: '24px' })
+            .setInteractive()
+            .on('pointerdown', () => {
+                this.scene.start('chapter3');
+            })
+            .on('pointerover', () => this.chapter3.setBackgroundColor('#ff0000'))
+            .on('pointerout', () => this.chapter3.setBackgroundColor(''));
+        this.chapter4 = this.add.text(300, 250, 'chapter4', { fill: '#ffffff', fontSize: '24px' })
+            .setInteractive()
+            .on('pointerdown', () => {
+                this.scene.start('chapter4');
+            })
+            .on('pointerover', () => this.chapter4.setBackgroundColor('#ff0000'))
+            .on('pointerout', () => this.chapter4.setBackgroundColor(''));
     }
     update() {
     }
