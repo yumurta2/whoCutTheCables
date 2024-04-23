@@ -31,7 +31,7 @@ export class chapter1 extends Phaser.Scene {
         this.brighteningCircle = [];
         this.brighteningCircle[0] = this.add.graphics();
         this.brighteningCircle[0].setDepth(12);
-                //this.brighteningCircle[1] = this.add.graphics();
+        //this.brighteningCircle[1] = this.add.graphics();
         //this.brighteningCircle[1].setDepth(13);
     }
     create() {
@@ -89,25 +89,32 @@ export class chapter1 extends Phaser.Scene {
         this.alset.lastAnim = null;
         this.text = this.add.text(230, 300, '', { fill: '#ffffff', fontSize: '18px' }).setDepth(14);
         
-        this.powerBox = false;
-        this.powerBoxNum = 0;
+
         this.createCameraMercek();
-        this.dialogWithMom = false;
-        this.momDialog = 0;
+
         this.text.x= 230;
         this.text.y= 300;
         this.slower = false;
         this.physics.world.setBounds(0, 0, 2000, 300);
+
+        this.powerBox = false;
+        this.powerBoxNum = 0;
+        this.dialogWithMom = false;
+        this.momDialog = 0;
+        this.kitchenD = false;
+        this.kitchenDLog = 0;
+        this.livingRoomD = false;
+        this.livingRoomDLog = 0;
     }
     updateMovement(){
         if(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D).isDown && !this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A).isDown){
             this.alset.anims.play('alsetRight',true);
-            this.alset.x += 3;
+            this.alset.x += 0.5;
             this.alset.lastAnim = 'alsetRight';
         }
         if(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A).isDown && !this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D).isDown){
             this.alset.anims.play('alsetLeft',true);
-            this.alset.x -= 3;
+            this.alset.x -= 0.5;
             this.alset.lastAnim = 'alsetLeft';
         }
         if(!this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A).isDown && !this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D).isDown || this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A).isDown && this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D).isDown){
@@ -151,7 +158,6 @@ export class chapter1 extends Phaser.Scene {
                 this.momP.x = -1000;
                 this.alsetP.x = this.text.x-150;
                 this.alsetP.setDepth(14);
-
                 break;
             case 5:
                 this.text.setText('').setPosition(this.text.x,this.text.y);
@@ -172,8 +178,6 @@ export class chapter1 extends Phaser.Scene {
                 this.alsetP.x = -1000;
                 break;
         }
-        
-
     }
     powerBoxFunc(){
         switch(this.powerBoxNum){
@@ -194,44 +198,67 @@ export class chapter1 extends Phaser.Scene {
                 break;
         }
     }
+    livingRoomDF(){
+        switch(this.livingRoomDLog){
+            case 0:
+                this.text.setText('press SPACE to interact\n\nlivingRoom Door').setPosition(this.text.x,this.text.y);
+                break;
+            case 1:
+                this.livingRoomD = true;
+                this.text.setText('Repair the power box first').setPosition(this.text.x,this.text.y);
+                break;
+            case 2:
+                this.livingRoomD = false;
+                this.livingRoomDLog = 0;
+                break;
+            default:
+                this.powerBox = false;
+                this.livingRoomDLog = 0;
+                break;
+        }
+    }
+    kitchenDF(){
+        switch(this.kitchenDLog){
+            case 0:
+                this.text.setText('press SPACE to interact\n\nkitchen Door').setPosition(this.text.x,this.text.y);
+                break;
+            case 1:
+                this.kitchenD = true;
+                this.text.setText('There is a lot to do\n\nbefore entering the kitchen.').setPosition(this.text.x,this.text.y);
+                break;
+            case 2:
+                this.kitchenD = false;
+                this.kitchenDLog = 0;
+                break;
+            default:
+                this.kitchenD = false;
+                this.kitchenDLog = 0;
+                break;
+        }
+    }
     update() { 
         this.text.x = this.cameras.main.midPoint.x - 150;
-        this.text.y = this.cameras.main.midPoint.y + 100 ;
-
-
+        this.text.y = this.cameras.main.midPoint.y + 100;
         if( Phaser.Math.Distance.Between(this.alset.x, this.alset.y, this.mom.x, this.mom.y) < 30){
             this.updateMomDialog();
             if(Phaser.Input.Keyboard.JustDown(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE))){
-                this.dialogWithMom = true;
                 this.momDialog = this.momDialog + 1;
             }
         }else if(Phaser.Math.Distance.Between(this.alset.x, this.alset.y, this.powerBoxBroken.x, this.powerBoxBroken.y) < 70){
             this.powerBoxFunc();
             if(Phaser.Input.Keyboard.JustDown(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE))){
-                
-                this.powerBoxNum = this.powerBoxNum + 1;
-                
+                this.powerBoxNum = this.powerBoxNum + 1;                
             }
         }else if(Phaser.Math.Distance.Between(this.alset.x, this.alset.y, this.livingRoomDoor.x, this.livingRoomDoor.y) < 50){
-            this.text.setText('press SPACE to go livingroom').setPosition(this.text.x,this.text.y);
+            this.livingRoomDF();
             if(Phaser.Input.Keyboard.JustDown(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE))){
-                this.dialogWithMom = true;
-                this.text.setText('Repair the power box first').setPosition(this.text.x,this.text.y);
-                if(Phaser.Input.Keyboard.JustDown(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE))){
-                    this.dialogWithMom = false;
-                    this.text.setText('').setPosition(this.text.x,this.text.y);
-                }
+                this.livingRoomDLog = this.livingRoomDLog + 1;
             }
         }
         else if(Phaser.Math.Distance.Between(this.alset.x, this.alset.y, this.kitchenDoor.x, this.kitchenDoor.y) < 50){
-            this.text.setText('press SPACE to go kitchen').setPosition(this.text.x,this.text.y);
+            this.kitchenDF();
             if(Phaser.Input.Keyboard.JustDown(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE))){
-                this.dialogWithMom = true;
-                this.text.setText('There is a lot to do\nbefore entering the kitchen.').setPosition(this.text.x,this.text.y);
-                if(Phaser.Input.Keyboard.JustDown(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE))){
-                    this.dialogWithMom = false;
-                    this.text.setText('').setPosition(this.text.x,this.text.y);
-                }
+                this.kitchenDLog = this.kitchenDLog + 1;
             }
         }
         else{
@@ -242,10 +269,7 @@ export class chapter1 extends Phaser.Scene {
         this.mercek.y = this.input.activePointer.y + this.alset.y -215;
         this.brighteningCircle[0].clear();
         //this.brighteningCircle[1].clear();
-
-            this.brighteningCircle[0].fillStyle(0x000000, Math.random()*0.5);
-
-
+        this.brighteningCircle[0].fillStyle(0x000000, Math.random()*0.5);
         //this.brighteningCircle[1].fillStyle(0x000000, Math.floor(Math.random()*10)/10);
         this.brighteningCircle[0].fillCircle(this.mercek.x, this.mercek.y, 100);
         //this.brighteningCircle[1].fillCircle(this.mercek.x, this.mercek.y, 90);
@@ -254,9 +278,8 @@ export class chapter1 extends Phaser.Scene {
         }else{
             this.mom.anims.play('momIdle',true);
         }
-
         this.electricEfect.anims.play('electricEfect',true);
-        if(!this.dialogWithMom && !this.powerBox){
+        if(!this.dialogWithMom && !this.powerBox && !this.livingRoomD && !this.kitchenD ){
             this.updateMovement();
         }
     }
