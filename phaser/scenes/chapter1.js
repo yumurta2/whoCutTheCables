@@ -11,7 +11,7 @@ export class chapter1 extends Phaser.Scene {
         this.load.spritesheet('mom', 'assets/characters/mom/momidle32x64.png', { frameWidth: 32, frameHeight: 64 });
         this.load.spritesheet('momters', 'assets/characters/mom/momidle32x64ters.png', { frameWidth: 32, frameHeight: 64 });
         this.load.image('mercek', 'assets/mercek.png');
-        this.load.image('corridor', 'assets/maps/house/corridor.png');
+        this.load.image('corridor', 'assets/maps/house/ep1/1corridor.png');
         this.load.image('livingRoomDoor', 'assets/maps/house/doors/livingRoomDoor.png');
         this.load.image('kitchenDoor', 'assets/maps/house/doors/kitchenDoor.png');
         this.load.image('alsetP', 'assets/portraits/alset.png');
@@ -178,7 +178,7 @@ export class chapter1 extends Phaser.Scene {
     powerBoxFunc(){
         switch(this.powerBoxNum){
             case 0:
-                this.text.setText('press SPACE to interact\nBroken Power Box').setPosition(this.text.x,this.text.y);
+                this.text.setText('press SPACE to interact\n\nBroken Power Box').setPosition(this.text.x,this.text.y);
                 break;
             case 1:
                 this.powerBox = true;
