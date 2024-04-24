@@ -92,12 +92,12 @@ export class chapter2 extends Phaser.Scene {
     updateMovement(){
         if(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D).isDown && !this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A).isDown){
             this.alset.anims.play('alsetRight',true);
-            this.alset.x += 3;
+            this.alset.x += 0.5;
             this.alset.lastAnim = 'alsetRight';
         }
         if(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A).isDown && !this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D).isDown){
             this.alset.anims.play('alsetLeft',true);
-            this.alset.x -= 3;
+            this.alset.x -= 0.5;
             this.alset.lastAnim = 'alsetLeft';
         }
         if(!this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A).isDown && !this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D).isDown || this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A).isDown && this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D).isDown){
@@ -168,7 +168,7 @@ export class chapter2 extends Phaser.Scene {
     update() { 
         if(this.coundown){
             if(this.currentHP>0){
-                this.currentHP -= 0.1;
+                this.currentHP -= 0.5;
                 this.timeBarFg.scaleX = this.currentHP / 100;
             }
             else{
