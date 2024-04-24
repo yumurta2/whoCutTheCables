@@ -43,20 +43,17 @@ export class chapter1 extends Phaser.Scene {
         this.anaTemaHizli.play();
         this.alsetP = this.add.image(-1000, 250, 'alsetP').setDepth(-3);
         this.momP = this.add.image(-1000, 250, 'momP').setDepth(-3);
-        this.leftWall = this.physics.add.image(0, 160, 'invisWall');
         this.powerBoxBroken = this.add.image(1000, 150, 'powerBoxBroken').setDepth(2).setScale(3);
         this.powerBoxFixed = this.add.image(-2000, 150, 'powerBoxFixed').setDepth(2).setScale(3);
+        this.electricEfect = this.physics.add.sprite(1000, 150, 'electricEfect').setDepth(14).setScale(3);
         this.livingRoomDoor = this.add.image(600, 165, 'livingRoomDoor').setDepth(2);
         this.kitchenDoor = this.add.image(1400, 165, 'kitchenDoor').setDepth(2);
-        this.electricEfect = this.physics.add.sprite(1000, 150, 'electricEfect').setDepth(14).setScale(3);
-        this.leftWall.setCollideWorldBounds(true);
+
         this.corridor = this.add.image(980, 150, 'corridor').setDepth(1);
         this.game.canvas.style.cursor = "none";
         this.alset = this.physics.add.sprite(100, 200, 'alsetIdleRight').setDepth(4);
         this.alset.setCollideWorldBounds(true);
         this.mom = this.physics.add.sprite(300, 200, 'mom').setDepth(4);
-        this.leftWall.setImmovable(true);
-        this.physics.add.collider(this.alset, this.leftWall);
         this.anims.create({
             key:'electricEfect',
             frames:this.anims.generateFrameNumbers('electricEfect', {start:0 , end:9}),
@@ -102,7 +99,7 @@ export class chapter1 extends Phaser.Scene {
         this.text.x= 230;
         this.text.y= 300;
         this.slower = false;
-        this.physics.world.setBounds(0, 0, 2000, 300);
+        this.physics.world.setBounds(0, 0, 1920, 300);
 
         this.coundown = false;
         this.powerBox = false;
@@ -285,7 +282,6 @@ export class chapter1 extends Phaser.Scene {
                 this.alsetP.setDepth(14);
                 this.text.setText('Mom: \n\n  thanks mom ..').setPosition(this.text.x,this.text.y);            
                 this.currentHP = 100;
-
                 break;
             case 8:
                 this.text.setText('').setPosition(this.text.x,this.text.y);
@@ -372,6 +368,7 @@ export class chapter1 extends Phaser.Scene {
                 this.kitchenDLog = this.kitchenDLog + 1;
             }
         }
+
         else{
             this.text.setText('').setPosition(this.text.x,this.text.y);
         }

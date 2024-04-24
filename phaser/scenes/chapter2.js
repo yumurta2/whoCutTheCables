@@ -13,6 +13,9 @@ export class chapter2 extends Phaser.Scene {
         this.load.image('livingRoom', 'assets/maps/house/ep1/1livingRoom.png');
         this.load.image('alsetP', 'assets/portraits/alset.png');
         this.load.image('momP', 'assets/portraits/mom.png');
+        this.load.image('powerBoxBroken', 'assets/objects/powerBoxBroken.png');
+        this.load.image('powerBoxFixed', 'assets/objects/powerBoxFixed.png');
+        this.load.spritesheet('electricEfect', 'assets/objects/electricEfect19x29.png', { frameWidth: 19, frameHeight: 29 });
         // this.load.image("roomTileSet", "assets/maps/room/tileset.png");
         // this.load.tilemapTiledJSON('roomTilemap', "assets/maps/room/tilemap.json");
     }
@@ -30,15 +33,24 @@ export class chapter2 extends Phaser.Scene {
     create() {
         this.alsetP = this.add.image(-1000, 250, 'alsetP').setDepth(-3);
         this.momP = this.add.image(-1000, 250, 'momP').setDepth(-3);
-        this.leftWall = this.physics.add.image(0, 160, 'invisWall');
-        
-        this.leftWall.setCollideWorldBounds(true);
+
+        this.powerBoxBroken = this.add.image(300, 150, 'powerBoxBroken').setDepth(2).setScale(3);
+        this.powerBoxFixed = this.add.image(-2000, 150, 'powerBoxFixed').setDepth(2).setScale(3);
+        this.electricEfect = this.physics.add.sprite(300, 150, 'electricEfect').setDepth(14).setScale(3);
+        this.anims.create({
+            key:'electricEfect',
+            frames:this.anims.generateFrameNumbers('electricEfect', {start:0 , end:9}),
+            frameRate: 8,
+        });
+
+
         this.livingRoom = this.add.image(400, 150, 'livingRoom').setDepth(1);
         this.game.canvas.style.cursor = "none";
         this.alset = this.physics.add.sprite(100, 200, 'alsetIdleRight').setDepth(3);
         this.alset.setCollideWorldBounds(true);
-        this.leftWall.setImmovable(true);
-        this.physics.add.collider(this.alset, this.leftWall);
+
+
+
         this.anims.create({
             key:'alsetIdleRight',
             frames:this.anims.generateFrameNumbers('alsetIdleRight', {start:0 , end:7}),
@@ -69,7 +81,7 @@ export class chapter2 extends Phaser.Scene {
         this.text.x= 230;
         this.text.y= 300;
         this.slower = false;
-        this.physics.world.setBounds(0, 0, 2000, 300);
+        this.physics.world.setBounds(0, 0, 800, 300);
     }
     updateMovement(){
         if(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D).isDown && !this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A).isDown){
@@ -151,7 +163,6 @@ export class chapter2 extends Phaser.Scene {
         this.text.x = this.cameras.main.midPoint.x - 150;
         this.text.y = this.cameras.main.midPoint.y + 100 ;
 
-
         // if( Phaser.Math.Distance.Between(this.alset.x, this.alset.y, this.mom.x, this.mom.y) < 30){
         //     this.updateMomDialog();
         //     if(Phaser.Input.Keyboard.JustDown(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE))){
@@ -174,7 +185,7 @@ export class chapter2 extends Phaser.Scene {
         //this.brighteningCircle[1].fillStyle(0x000000, Math.floor(Math.random()*10)/10);
         this.brighteningCircle[0].fillCircle(this.mercek.x, this.mercek.y, 100);
         //this.brighteningCircle[1].fillCircle(this.mercek.x, this.mercek.y, 90);
-
+        this.electricEfect.anims.play('electricEfect',true);
         if(!this.dialogWithMom){
             this.updateMovement();
         }
