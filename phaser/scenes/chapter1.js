@@ -119,12 +119,12 @@ export class chapter1 extends Phaser.Scene {
     updateMovement(){
         if(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D).isDown && !this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A).isDown){
             this.alset.anims.play('alsetRight',true);
-            this.alset.x += 0.5;
+            this.alset.x += 1;
             this.alset.lastAnim = 'alsetRight';
         }
         if(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A).isDown && !this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D).isDown){
             this.alset.anims.play('alsetLeft',true);
-            this.alset.x -= 0.5;
+            this.alset.x -= 1;
             this.alset.lastAnim = 'alsetLeft';
         }
         if(!this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A).isDown && !this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D).isDown || this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A).isDown && this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D).isDown){
