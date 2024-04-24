@@ -33,11 +33,10 @@ export class chapter2 extends Phaser.Scene {
         this.leftWall = this.physics.add.image(0, 160, 'invisWall');
         
         this.leftWall.setCollideWorldBounds(true);
-        this.livingRoom = this.add.image(980, 150, 'livingRoom').setDepth(1);
+        this.livingRoom = this.add.image(400, 150, 'livingRoom').setDepth(1);
         this.game.canvas.style.cursor = "none";
         this.alset = this.physics.add.sprite(100, 200, 'alsetIdleRight').setDepth(3);
         this.alset.setCollideWorldBounds(true);
-        this.mom = this.physics.add.sprite(300, 200, 'mom').setDepth(2);
         this.leftWall.setImmovable(true);
         this.physics.add.collider(this.alset, this.leftWall);
         this.anims.create({
@@ -60,11 +59,7 @@ export class chapter2 extends Phaser.Scene {
             frames:this.anims.generateFrameNumbers('alsetLeft', {start:0 , end:4}),
             frameRate: 4,
         });
-        this.anims.create({
-            key:'momIdle',
-            frames:this.anims.generateFrameNumbers('mom', {start:0 , end:6}),
-            frameRate: 8,
-        });
+
 
         this.alset.lastAnim = null;
         this.text = this.add.text(230, 300, '', { fill: '#ffffff', fontSize: '18px' }).setDepth(14);
@@ -157,15 +152,15 @@ export class chapter2 extends Phaser.Scene {
         this.text.y = this.cameras.main.midPoint.y + 100 ;
 
 
-        if( Phaser.Math.Distance.Between(this.alset.x, this.alset.y, this.mom.x, this.mom.y) < 30){
-            this.updateMomDialog();
-            if(Phaser.Input.Keyboard.JustDown(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE))){
-                this.dialogWithMom = true;
-                this.momDialog = this.momDialog + 1;
-            }
-        }else{
-            this.text.setText('').setPosition(this.text.x,this.text.y);
-        }
+        // if( Phaser.Math.Distance.Between(this.alset.x, this.alset.y, this.mom.x, this.mom.y) < 30){
+        //     this.updateMomDialog();
+        //     if(Phaser.Input.Keyboard.JustDown(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE))){
+        //         this.dialogWithMom = true;
+        //         this.momDialog = this.momDialog + 1;
+        //     }
+        // }else{
+        //     this.text.setText('').setPosition(this.text.x,this.text.y);
+        // }
         //this.cameras.main.midPoint.x this.cameras.main.midPoint.y
         this.mercek.x = this.input.activePointer.x + this.alset.x -384;
         this.mercek.y = this.input.activePointer.y + this.alset.y -215;
@@ -179,7 +174,7 @@ export class chapter2 extends Phaser.Scene {
         //this.brighteningCircle[1].fillStyle(0x000000, Math.floor(Math.random()*10)/10);
         this.brighteningCircle[0].fillCircle(this.mercek.x, this.mercek.y, 100);
         //this.brighteningCircle[1].fillCircle(this.mercek.x, this.mercek.y, 90);
-        this.mom.anims.play('momIdle',true);
+
         if(!this.dialogWithMom){
             this.updateMovement();
         }

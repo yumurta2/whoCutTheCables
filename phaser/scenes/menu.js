@@ -4,7 +4,7 @@ export class menu extends Phaser.Scene {
     }
     preload() {
         this.load.image('thumbnail', 'assets/thumbnails/thumbnail.png');
-        this.load.audio('menuMusic', 'assets/sounds/menuMusic.wav');
+        this.load.audio('menuMusic', 'assets/sounds/MenuMusic.wav');
     }
     create() {
         //this.add.rectangle(0, 0, this.game.config.width, this.game.config.height, 0x2c3e50).setOrigin(0);

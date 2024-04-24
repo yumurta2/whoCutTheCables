@@ -15,7 +15,7 @@ const config = {
         default: 'arcade',
         arcade: {
             gravity: { y: 0 },
-            debug: true
+            debug: false
         }
     },
     scene: [opening,menu,chapter0,chapter1,chapter2,chapter3,chapter4,chapter5,youDied],
