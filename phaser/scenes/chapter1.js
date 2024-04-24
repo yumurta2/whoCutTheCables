@@ -18,6 +18,8 @@ export class chapter1 extends Phaser.Scene {
         this.load.image('momP', 'assets/portraits/mom.png');
         this.load.image('powerBoxBroken', 'assets/objects/powerBoxBroken.png');
         this.load.spritesheet('electricEfect', 'assets/objects/electricEfect19x29.png', { frameWidth: 19, frameHeight: 29 });
+        this.load.image('timeBarFg', 'assets/ui/timeBarFg.png');
+        this.load.image('timeBarBg', 'assets/ui/timeBarBg.png');
         
 
         // this.load.image("roomTileSet", "assets/maps/room/tileset.png");
@@ -105,6 +107,11 @@ export class chapter1 extends Phaser.Scene {
         this.kitchenDLog = 0;
         this.livingRoomD = false;
         this.livingRoomDLog = 0;
+
+        this.timeBarBg = this.add.image(this.text.x-1000,this.text.y-200, 'timeBarBg').setDepth(15);
+        this.timeBarFg = this.add.image(this.text.x-1000,this.text.y-200, 'timeBarFg').setDepth(16);
+        this.currentHP = 100;
+
     }
     updateMovement(){
         if(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D).isDown && !this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A).isDown){
@@ -179,25 +186,7 @@ export class chapter1 extends Phaser.Scene {
                 break;
         }
     }
-    powerBoxFunc(){
-        switch(this.powerBoxNum){
-            case 0:
-                this.text.setText('press SPACE to interact\n\nBroken Power Box').setPosition(this.text.x,this.text.y);
-                break;
-            case 1:
-                this.powerBox = true;
-                this.text.setText('repair game').setPosition(this.text.x,this.text.y);
-                break;
-            case 2:
-                this.powerBox = false;
-                this.powerBoxNum = 0;
-                break;
-            default:
-                this.powerBox = false;
-                this.powerBoxNum = 0;
-                break;
-        }
-    }
+
     livingRoomDF(){
         switch(this.livingRoomDLog){
             case 0:
@@ -236,7 +225,42 @@ export class chapter1 extends Phaser.Scene {
                 break;
         }
     }
+    powerBoxFunc(){
+        switch(this.powerBoxNum){
+            case 0:
+                this.text.setText('press SPACE to interact\n\nBroken Power Box').setPosition(this.text.x,this.text.y);
+                break;
+            case 1:
+                this.powerBox = true;
+                this.timeBarBg.x = this.text.x +150;
+                this.timeBarFg.x = this.text.x +150;
+
+                this.text.setText('repair game').setPosition(this.text.x,this.text.y);
+                break;
+            case 2:
+                this.timeBarBg.x = this.text.x -1000;
+                this.timeBarFg.x = this.text.x -1000;
+                this.powerBox = false;
+                this.powerBoxNum = 0;            
+                break;
+            default:
+                this.timeBarBg.x = this.text.x -1000;
+                this.timeBarFg.x = this.text.x -1000;
+                this.powerBox = false;
+                this.powerBoxNum = 0;
+                break;
+        }
+    }
     update() { 
+        if(this.powerBox){
+            if(this.currentHP>0){
+                this.currentHP -= 0.1;
+                this.timeBarFg.scaleX = this.currentHP / 100;
+            }
+            else{
+                this.scene.start('youDied');
+            }
+        }
         this.text.x = this.cameras.main.midPoint.x - 150;
         this.text.y = this.cameras.main.midPoint.y + 100;
         if( Phaser.Math.Distance.Between(this.alset.x, this.alset.y, this.mom.x, this.mom.y) < 30){
