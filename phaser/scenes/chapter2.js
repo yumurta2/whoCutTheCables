@@ -10,7 +10,7 @@ export class chapter2 extends Phaser.Scene {
         this.load.image('invisWall', 'assets/invisWall.png');
         this.load.spritesheet('mom', 'assets/characters/mom/momidle32x64.png', { frameWidth: 32, frameHeight: 64 });
         this.load.image('mercek', 'assets/mercek.png');
-        this.load.image('livingRoom', 'assets/maps/house/livingRoom.png');
+        this.load.image('livingRoom', 'assets/maps/house/ep1/1livingRoom.png');
         this.load.image('alsetP', 'assets/portraits/alset.png');
         this.load.image('momP', 'assets/portraits/mom.png');
         // this.load.image("roomTileSet", "assets/maps/room/tileset.png");
