@@ -11,7 +11,7 @@ export class chapter3 extends Phaser.Scene {
         this.load.spritesheet('mom', 'assets/characters/mom/momidle32x64.png', { frameWidth: 32, frameHeight: 64 });
         this.load.spritesheet('momters', 'assets/characters/mom/momidle32x64ters.png', { frameWidth: 32, frameHeight: 64 });
         this.load.image('mercek', 'assets/mercek.png');
-        this.load.image('corridor', 'assets/maps/house/ep1/1corridor.png');
+        this.load.image('corridor2', 'assets/maps/house/ep2/2corridor.png');
         this.load.image('livingRoomDoor', 'assets/maps/house/doors/livingRoomDoor.png');
         this.load.image('kitchenDoor', 'assets/maps/house/doors/kitchenDoor.png');
         this.load.image('alsetP', 'assets/portraits/alset.png');
@@ -43,15 +43,15 @@ export class chapter3 extends Phaser.Scene {
         this.anaTemaHizli.play();
         this.alsetP = this.add.image(-1000, 250, 'alsetP').setDepth(-3);
         this.momP = this.add.image(-1000, 250, 'momP').setDepth(-3);
-        this.powerBoxBroken = this.add.image(1000, 150, 'powerBoxBroken').setDepth(2).setScale(3);
-        this.powerBoxFixed = this.add.image(-2000, 150, 'powerBoxFixed').setDepth(2).setScale(3);
-        this.electricEfect = this.physics.add.sprite(1000, 150, 'electricEfect').setDepth(14).setScale(3);
+        this.powerBoxBroken = this.add.image(-2000, 150, 'powerBoxBroken').setDepth(2).setScale(3);
+        this.powerBoxFixed = this.add.image(1000, 150, 'powerBoxFixed').setDepth(2).setScale(3);
+        this.electricEfect = this.physics.add.sprite(-2000, 150, 'electricEfect').setDepth(14).setScale(3);
         this.livingRoomDoor = this.add.image(600, 165, 'livingRoomDoor').setDepth(2);
         this.kitchenDoor = this.add.image(1400, 165, 'kitchenDoor').setDepth(2);
 
-        this.corridor = this.add.image(980, 150, 'corridor').setDepth(1);
+        this.corridor2 = this.add.image(980, 150, 'corridor2').setDepth(1);
         this.game.canvas.style.cursor = "none";
-        this.alset = this.physics.add.sprite(100, 200, 'alsetIdleRight').setDepth(4);
+        this.alset = this.physics.add.sprite(50, 200, 'alsetIdleRight').setDepth(4);
         this.alset.setCollideWorldBounds(true);
         this.mom = this.physics.add.sprite(300, 200, 'mom').setDepth(4);
         this.anims.create({
@@ -114,6 +114,8 @@ export class chapter3 extends Phaser.Scene {
         this.timeBarBg = this.add.image(this.text.x-1000,this.text.y-200, 'timeBarBg').setDepth(15);
         this.timeBarFg = this.add.image(this.text.x-1000,this.text.y-200, 'timeBarFg').setDepth(16);
         this.currentHP = 100;
+        this.start = true;
+        this.startNum = 0;
 
     }
     updateMovement(){
@@ -144,7 +146,7 @@ export class chapter3 extends Phaser.Scene {
                 break;
             case 1:
                 this.dialogWithMom = true;
-                this.text.setText('Mom: \n\n  You are still here ?!').setPosition(this.text.x,this.text.y);
+                this.text.setText('Mom: \n\n  et sollicitudin ac orci').setPosition(this.text.x,this.text.y);
                 this.momP.x = this.text.x+450;
                 this.momP.y = this.text.y-100;
                 this.alsetP.y = this.text.y-100;
@@ -152,18 +154,18 @@ export class chapter3 extends Phaser.Scene {
                 break;
             case 2:
                 this.dialogWithMom = true;
-                this.text.setText('Mom: \n\n  And trying to talk to me ?!').setPosition(this.text.x,this.text.y);
+                this.text.setText('Mom: \n\n  morbi enim nunc faucibus a').setPosition(this.text.x,this.text.y);
                 this.momP.setDepth(14);
         
                 break;
             case 3:
                 this.dialogWithMom = true;
-                this.text.setText('Mom: \n\n  Hurry fix the electrics !').setPosition(this.text.x,this.text.y);
+                this.text.setText('Mom: \n\n  mi ipsum faucibus vitae').setPosition(this.text.x,this.text.y);
                 this.momP.setDepth(14);
                 break;
             case 4:
                 this.dialogWithMom = true;
-                this.text.setText('Alset: \n\n  Sorry mom..').setPosition(this.text.x,this.text.y);
+                this.text.setText('Alset: \n\n  tempus egestas sed sed').setPosition(this.text.x,this.text.y);
                 this.momP.setDepth(-4);
                 this.momP.x = -1000;
                 this.alsetP.x = this.text.x-150;
@@ -190,18 +192,15 @@ export class chapter3 extends Phaser.Scene {
         }
     }
 
-    livingRoomDF(fix){
+    livingRoomDF(){
         switch(this.livingRoomDLog){
             case 0:
                 this.text.setText('press SPACE to interact\n\nlivingRoom Door').setPosition(this.text.x,this.text.y);
                 break;
             case 1:
-                if(fix){
-                    this.scene.start('chapter2');
-                }else {
-                    this.livingRoomD = true;
-                    this.text.setText('Repair the power box first').setPosition(this.text.x,this.text.y);
-                }
+
+                this.livingRoomD = true;
+                this.text.setText('You already fixed\n\npowerbox at livingroom').setPosition(this.text.x,this.text.y);
 
                 break;
             case 2:
@@ -220,8 +219,7 @@ export class chapter3 extends Phaser.Scene {
                 this.text.setText('press SPACE to interact\n\nkitchen Door').setPosition(this.text.x,this.text.y);
                 break;
             case 1:
-                this.kitchenD = true;
-                this.text.setText('There is a lot to do\n\nbefore entering the kitchen.').setPosition(this.text.x,this.text.y);
+                this.scene.start('chapter4');
                 break;
             case 2:
                 this.kitchenD = false;
@@ -244,25 +242,33 @@ export class chapter3 extends Phaser.Scene {
                 this.timeBarBg.x = this.text.x +150;
                 this.timeBarFg.x = this.text.x +150;
 
-                this.text.setText('T').setPosition(this.text.x,this.text.y);
+                this.text.setText('I').setPosition(this.text.x,this.text.y);
                 break;
             case 2:
-
-                this.text.setText('R').setPosition(this.text.x,this.text.y);            
+                this.text.setText('L').setPosition(this.text.x,this.text.y);            
                 break;
             case 3:
-
-                this.text.setText('A').setPosition(this.text.x,this.text.y);            
+                this.text.setText('LL').setPosition(this.text.x,this.text.y);            
                 break;
             case 4:
-
-                this.text.setText('S').setPosition(this.text.x,this.text.y);            
+                this.text.setText('B').setPosition(this.text.x,this.text.y);            
                 break;
             case 5:
-
-                this.text.setText('H').setPosition(this.text.x,this.text.y);            
+                this.text.setText('E').setPosition(this.text.x,this.text.y);            
                 break;
             case 6:
+                this.text.setText('B').setPosition(this.text.x,this.text.y);            
+                break;
+            case 7:
+                this.text.setText('A').setPosition(this.text.x,this.text.y);            
+                break;
+            case 8:
+                this.text.setText('C').setPosition(this.text.x,this.text.y);            
+                break;
+            case 9:
+                this.text.setText('K').setPosition(this.text.x,this.text.y);            
+                break;
+            case 10:
 
                 this.coundown = false;
                 this.momP.x = this.text.x+450;
@@ -273,7 +279,7 @@ export class chapter3 extends Phaser.Scene {
                 this.text.setText('Mom: \n\n  Well done son\n\n  You made it').setPosition(this.text.x,this.text.y);           
 
                 break;
-            case 7:
+            case 11:
 
                 this.text.setText('Alset: \n\n  thanks mom..').setPosition(this.text.x,this.text.y);
                 this.momP.setDepth(-4);
@@ -282,9 +288,8 @@ export class chapter3 extends Phaser.Scene {
                 this.alsetP.setDepth(14);
                 this.text.setText('Mom: \n\n  thanks mom ..').setPosition(this.text.x,this.text.y);            
                 this.currentHP = 100;
-
                 break;
-            case 8:
+            case 12:
                 this.text.setText('').setPosition(this.text.x,this.text.y);
                 this.momP.setDepth(-4);
                 this.alsetP.setDepth(-4);
@@ -319,6 +324,32 @@ export class chapter3 extends Phaser.Scene {
                 break;
         }
     }
+    onStartUpdate(){
+        switch(this.startNum){
+            case 0:
+            this.text.setText('Alset: \n\n  wait What?').setPosition(this.text.x,this.text.y);
+
+            this.alsetP.x = this.text.x-150;
+            this.alsetP.setDepth(14);
+            break;
+            case 1:
+            this.text.setText('Alset: \n\n  How did i get here?').setPosition(this.text.x,this.text.y);
+            break;
+            case 2:
+            this.text.setText('Alset: \n\n  What happened to our house\n\n  What are those on the walls?').setPosition(this.text.x,this.text.y);
+            break;
+            case 3:
+            this.start = false;
+            this.alsetP.x = this.text.x-2000;
+            this.text.setText('').setPosition(this.text.x,this.text.y);
+            break;
+            default:
+                this.start = false;
+                this.alsetP.x = this.text.x-2000;
+                this.text.setText('').setPosition(this.text.x,this.text.y);
+            break;
+        }
+    }
     update() { 
         if(this.coundown){
             if(this.currentHP>0){
@@ -329,8 +360,15 @@ export class chapter3 extends Phaser.Scene {
                 this.scene.start('youDied');
             }
         }
+
         this.text.x = this.cameras.main.midPoint.x - 150;
         this.text.y = this.cameras.main.midPoint.y + 100;
+         if(this.start){
+            this.onStartUpdate();
+            if(Phaser.Input.Keyboard.JustDown(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE))){
+                this.startNum = this.startNum + 1;
+            }
+        }else
         if( Phaser.Math.Distance.Between(this.alset.x, this.alset.y, this.mom.x, this.mom.y) < 30){
             this.updateMomDialog();
             if(Phaser.Input.Keyboard.JustDown(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE))){
@@ -338,27 +376,39 @@ export class chapter3 extends Phaser.Scene {
             }
         }else if(Phaser.Math.Distance.Between(this.alset.x, this.alset.y, this.powerBoxBroken.x, this.powerBoxBroken.y) < 70){
             this.powerBoxFunc();
-            if(Phaser.Input.Keyboard.JustDown(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)) && (this.powerBoxNum<1 || this.powerBoxNum== 6|| this.powerBoxNum==7) ){
+            if(Phaser.Input.Keyboard.JustDown(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)) && (this.powerBoxNum<1 || this.powerBoxNum> 9) ){
                 this.powerBoxNum = this.powerBoxNum + 1;                
-            }else if(Phaser.Input.Keyboard.JustDown(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.T)) && this.powerBoxNum==1) {
+            }else if(this.powerBoxNum==1 && Phaser.Input.Keyboard.JustDown(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.I)) ) {
                 this.powerBoxNum = this.powerBoxNum + 1;  
             }
-            else if(Phaser.Input.Keyboard.JustDown(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R)) && this.powerBoxNum==2) {
+            else if(  this.powerBoxNum==2 && Phaser.Input.Keyboard.JustDown(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.L))) {
                 this.powerBoxNum = this.powerBoxNum + 1;  
             }
-            else if(Phaser.Input.Keyboard.JustDown(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A)) && this.powerBoxNum==3) {
+            else if(  this.powerBoxNum==3 && Phaser.Input.Keyboard.JustDown(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.L)) ) {
                 this.powerBoxNum = this.powerBoxNum + 1;  
             }
-            else if(Phaser.Input.Keyboard.JustDown(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S)) && this.powerBoxNum==4) {
+            else if(this.powerBoxNum==4 && Phaser.Input.Keyboard.JustDown(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.B))  ) {
                 this.powerBoxNum = this.powerBoxNum + 1;  
             }
-            else if(Phaser.Input.Keyboard.JustDown(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.H)) && this.powerBoxNum==5) {
+            else if(this.powerBoxNum==5 && Phaser.Input.Keyboard.JustDown(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E)) ) {
+                this.powerBoxNum = this.powerBoxNum + 1;  
+            }
+            else if(this.powerBoxNum==6 && Phaser.Input.Keyboard.JustDown(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.B)) ) {
+                this.powerBoxNum = this.powerBoxNum + 1;  
+            }
+            else if(this.powerBoxNum==7 && Phaser.Input.Keyboard.JustDown(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A)) ) {
+                this.powerBoxNum = this.powerBoxNum + 1;  
+            }
+            else if(this.powerBoxNum==8 && Phaser.Input.Keyboard.JustDown(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.C)) ) {
+                this.powerBoxNum = this.powerBoxNum + 1;  
+            }
+            else if(this.powerBoxNum==9 && Phaser.Input.Keyboard.JustDown(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.K)) ) {
                 this.powerBoxNum = this.powerBoxNum + 1;  
             }
 
             
         }else if(Phaser.Math.Distance.Between(this.alset.x, this.alset.y, this.livingRoomDoor.x, this.livingRoomDoor.y) < 50){
-            this.livingRoomDF(this.didFix);
+            this.livingRoomDF();
             if(Phaser.Input.Keyboard.JustDown(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE))){
                 this.livingRoomDLog = this.livingRoomDLog + 1;
             }
@@ -369,6 +419,7 @@ export class chapter3 extends Phaser.Scene {
                 this.kitchenDLog = this.kitchenDLog + 1;
             }
         }
+
         else{
             this.text.setText('').setPosition(this.text.x,this.text.y);
         }
@@ -387,7 +438,7 @@ export class chapter3 extends Phaser.Scene {
             this.mom.anims.play('momIdle',true);
         }
         this.electricEfect.anims.play('electricEfect',true);
-        if(!this.dialogWithMom && !this.powerBox && !this.livingRoomD && !this.kitchenD ){
+        if(!this.dialogWithMom && !this.powerBox && !this.livingRoomD && !this.kitchenD && !this.start){
             this.updateMovement();
         }
     }

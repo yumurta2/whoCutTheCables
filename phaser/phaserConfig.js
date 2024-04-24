@@ -31,7 +31,7 @@ const config = {
         roundPixels: true
     },
     fps: {
-        target: 144,
+        target: 60,
         forceSetTimeOut: true
     }
 };

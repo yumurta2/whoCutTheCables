@@ -16,6 +16,8 @@ export class chapter2 extends Phaser.Scene {
         this.load.image('powerBoxBroken', 'assets/objects/powerBoxBroken.png');
         this.load.image('powerBoxFixed', 'assets/objects/powerBoxFixed.png');
         this.load.spritesheet('electricEfect', 'assets/objects/electricEfect19x29.png', { frameWidth: 19, frameHeight: 29 });
+        this.load.image('timeBarFg', 'assets/ui/timeBarFg.png');
+        this.load.image('timeBarBg', 'assets/ui/timeBarBg.png');
         // this.load.image("roomTileSet", "assets/maps/room/tileset.png");
         // this.load.tilemapTiledJSON('roomTilemap', "assets/maps/room/tilemap.json");
     }
@@ -43,6 +45,7 @@ export class chapter2 extends Phaser.Scene {
             frameRate: 8,
         });
 
+        this.text = this.add.text(230, 300, '', { fill: '#ffffff', fontSize: '18px' }).setDepth(14);
 
         this.livingRoom = this.add.image(400, 150, 'livingRoom').setDepth(1);
         this.game.canvas.style.cursor = "none";
@@ -75,13 +78,16 @@ export class chapter2 extends Phaser.Scene {
 
         this.alset.lastAnim = null;
         this.text = this.add.text(230, 300, '', { fill: '#ffffff', fontSize: '18px' }).setDepth(14);
-        this.dialogWithMom = false;
+        this.powerBox = false;
         this.createCameraMercek();
-        this.momDialog = 0;
+        this.powerBoxNum = 0;
         this.text.x= 230;
         this.text.y= 300;
         this.slower = false;
         this.physics.world.setBounds(0, 0, 800, 300);
+        this.timeBarBg = this.add.image(this.text.x-1000,this.text.y-200, 'timeBarBg').setDepth(15);
+        this.timeBarFg = this.add.image(this.text.x-1000,this.text.y-200, 'timeBarFg').setDepth(16);
+        this.currentHP = 100;
     }
     updateMovement(){
         if(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D).isDown && !this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A).isDown){
@@ -103,66 +109,124 @@ export class chapter2 extends Phaser.Scene {
             } 
         }
     }
-    updateMomDialog(){
-        switch(this.momDialog){
+    powerBoxInteract(){
+        switch(this.powerBoxNum){
             case 0:
                 this.text.setText('press SPACE to interact').setPosition(this.text.x,this.text.y);
-                this.dialogWithMom = false;
                 break;
             case 1:
-                this.dialogWithMom = true;
-                this.text.setText('Mom: \n\n  You are still here ?!').setPosition(this.text.x,this.text.y);
-                this.momP.x = this.text.x+450;
-                this.momP.y = this.text.y-100;
-                this.alsetP.y = this.text.y-100;
-                this.momP.setDepth(14);
+                this.powerBox = true;
+                this.coundown = true;
+                this.timeBarBg.x = this.text.x +150;
+                this.timeBarFg.x = this.text.x +150;
+                this.text.setText('F').setPosition(this.text.x,this.text.y);
                 break;
             case 2:
-                this.dialogWithMom = true;
-                this.text.setText('Mom: \n\n  And trying to talk to me ?!').setPosition(this.text.x,this.text.y);
-                this.momP.setDepth(14);
-        
+                this.text.setText('R').setPosition(this.text.x,this.text.y);
                 break;
             case 3:
-                this.dialogWithMom = true;
-                this.text.setText('Mom: \n\n  Hurry fix the electrics !').setPosition(this.text.x,this.text.y);
-                this.momP.setDepth(14);
+                this.text.setText('I').setPosition(this.text.x,this.text.y);
                 break;
             case 4:
-                this.dialogWithMom = true;
-                this.text.setText('Alset: \n\n  Sorry mom..').setPosition(this.text.x,this.text.y);
-                this.momP.setDepth(-4);
-                this.momP.x = -1000;
-                this.alsetP.x = this.text.x-150;
-                this.alsetP.setDepth(14);
-
+                this.text.setText('E').setPosition(this.text.x,this.text.y);
                 break;
             case 5:
-                this.text.setText('').setPosition(this.text.x,this.text.y);
-                this.momP.setDepth(-4);
-                this.alsetP.setDepth(-4);
-                this.momP.x = -1000;
-                this.alsetP.x = -1000;
-                this.dialogWithMom = false;
-                this.momDialog = 0;
+                this.text.setText('N').setPosition(this.text.x,this.text.y);
                 break;
+            case 6:
+                this.text.setText('D').setPosition(this.text.x,this.text.y);
+                break;
+            case 7:
+                this.text.setText('O').setPosition(this.text.x,this.text.y);
+                break;
+            case 8:
+                this.text.setText('F').setPosition(this.text.x,this.text.y);
+                break;
+            case 9:
+                this.text.setText('S').setPosition(this.text.x,this.text.y);
+                break;
+            case 10:
+                this.text.setText('A').setPosition(this.text.x,this.text.y);
+                break;
+            case 11:
+                this.text.setText('R').setPosition(this.text.x,this.text.y);
+                break;
+            case 12:
+                this.text.setText('A').setPosition(this.text.x,this.text.y);
+                break;
+            case 13:
+                this.text.setText('H').setPosition(this.text.x,this.text.y);
+                break;
+            case 14:
+                this.scene.start('chapter3');
+                break;
+
             default:
-                this.text.setText('').setPosition(this.text.x,this.text.y);
-                this.momP.setDepth(-4);
-                this.alsetP.setDepth(-4);
-                this.dialogWithMom = false;
-                this.momDialog = 0;
-                this.momP.x = -1000;
-                this.alsetP.x = -1000;
                 break;
         }
-        
-
     }
     update() { 
+        if(this.coundown){
+            if(this.currentHP>0){
+                this.currentHP -= 0.1;
+                this.timeBarFg.scaleX = this.currentHP / 100;
+            }
+            else{
+                this.scene.start('youDied');
+            }
+        }
         this.text.x = this.cameras.main.midPoint.x - 150;
         this.text.y = this.cameras.main.midPoint.y + 100 ;
 
+        if(Phaser.Math.Distance.Between(this.alset.x, this.alset.y, this.powerBoxBroken.x, this.powerBoxBroken.y) < 70){
+            this.powerBoxInteract();
+            if(Phaser.Input.Keyboard.JustDown(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE )) && this.powerBoxNum== 0){
+                this.powerBoxNum = this.powerBoxNum + 1;
+            }else if( this.powerBoxNum == 1 && Phaser.Input.Keyboard.JustDown(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F )) ){
+                this.powerBoxNum = this.powerBoxNum + 1;
+            }
+            else if(this.powerBoxNum == 2 && Phaser.Input.Keyboard.JustDown(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R )) ){
+                this.powerBoxNum = this.powerBoxNum + 1;
+            }
+            else if(Phaser.Input.Keyboard.JustDown(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.I )) && this.powerBoxNum == 3){
+                this.powerBoxNum = this.powerBoxNum + 1;
+            }
+            else if(Phaser.Input.Keyboard.JustDown(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E )) && this.powerBoxNum == 4){
+                this.powerBoxNum = this.powerBoxNum + 1;
+            }
+            else if(Phaser.Input.Keyboard.JustDown(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.N )) && this.powerBoxNum == 5){
+                this.powerBoxNum = this.powerBoxNum + 1;
+            }
+            else if(Phaser.Input.Keyboard.JustDown(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D )) && this.powerBoxNum == 6){
+                this.powerBoxNum = this.powerBoxNum + 1;
+            }
+            else if(Phaser.Input.Keyboard.JustDown(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.O )) && this.powerBoxNum == 7){
+                this.powerBoxNum = this.powerBoxNum + 1;
+            }
+            else if(Phaser.Input.Keyboard.JustDown(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F )) && this.powerBoxNum == 8){
+                this.powerBoxNum = this.powerBoxNum + 1;
+            }
+            else if(Phaser.Input.Keyboard.JustDown(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S )) && this.powerBoxNum == 9){
+                this.powerBoxNum = this.powerBoxNum + 1;
+            }
+            else if(this.powerBoxNum == 10 && Phaser.Input.Keyboard.JustDown(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A )) ){
+                this.powerBoxNum = this.powerBoxNum + 1;
+            }
+            else if(this.powerBoxNum == 11 && Phaser.Input.Keyboard.JustDown(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R )) ){
+                this.powerBoxNum = this.powerBoxNum + 1;
+            }
+            else if(Phaser.Input.Keyboard.JustDown(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A )) && this.powerBoxNum == 12){
+                this.powerBoxNum = this.powerBoxNum + 1;
+            }
+            else if(Phaser.Input.Keyboard.JustDown(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.H )) && this.powerBoxNum == 13){
+                this.powerBoxNum = this.powerBoxNum + 1;
+            }
+
+
+        }else{
+            this.text.setText('').setPosition(this.text.x,this.text.y);
+
+        }
         // if( Phaser.Math.Distance.Between(this.alset.x, this.alset.y, this.mom.x, this.mom.y) < 30){
         //     this.updateMomDialog();
         //     if(Phaser.Input.Keyboard.JustDown(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE))){
@@ -186,7 +250,7 @@ export class chapter2 extends Phaser.Scene {
         this.brighteningCircle[0].fillCircle(this.mercek.x, this.mercek.y, 100);
         //this.brighteningCircle[1].fillCircle(this.mercek.x, this.mercek.y, 90);
         this.electricEfect.anims.play('electricEfect',true);
-        if(!this.dialogWithMom){
+        if(!this.powerBox){
             this.updateMovement();
         }
     }

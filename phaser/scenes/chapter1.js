@@ -202,7 +202,6 @@ export class chapter1 extends Phaser.Scene {
                     this.livingRoomD = true;
                     this.text.setText('Repair the power box first').setPosition(this.text.x,this.text.y);
                 }
-
                 break;
             case 2:
                 this.livingRoomD = false;
@@ -244,25 +243,33 @@ export class chapter1 extends Phaser.Scene {
                 this.timeBarBg.x = this.text.x +150;
                 this.timeBarFg.x = this.text.x +150;
 
-                this.text.setText('T').setPosition(this.text.x,this.text.y);
+                this.text.setText('I').setPosition(this.text.x,this.text.y);
                 break;
             case 2:
-
-                this.text.setText('R').setPosition(this.text.x,this.text.y);            
+                this.text.setText('L').setPosition(this.text.x,this.text.y);            
                 break;
             case 3:
-
-                this.text.setText('A').setPosition(this.text.x,this.text.y);            
+                this.text.setText('LL').setPosition(this.text.x,this.text.y);            
                 break;
             case 4:
-
-                this.text.setText('S').setPosition(this.text.x,this.text.y);            
+                this.text.setText('B').setPosition(this.text.x,this.text.y);            
                 break;
             case 5:
-
-                this.text.setText('H').setPosition(this.text.x,this.text.y);            
+                this.text.setText('E').setPosition(this.text.x,this.text.y);            
                 break;
             case 6:
+                this.text.setText('B').setPosition(this.text.x,this.text.y);            
+                break;
+            case 7:
+                this.text.setText('A').setPosition(this.text.x,this.text.y);            
+                break;
+            case 8:
+                this.text.setText('C').setPosition(this.text.x,this.text.y);            
+                break;
+            case 9:
+                this.text.setText('K').setPosition(this.text.x,this.text.y);            
+                break;
+            case 10:
 
                 this.coundown = false;
                 this.momP.x = this.text.x+450;
@@ -273,7 +280,7 @@ export class chapter1 extends Phaser.Scene {
                 this.text.setText('Mom: \n\n  Well done son\n\n  You made it').setPosition(this.text.x,this.text.y);           
 
                 break;
-            case 7:
+            case 11:
 
                 this.text.setText('Alset: \n\n  thanks mom..').setPosition(this.text.x,this.text.y);
                 this.momP.setDepth(-4);
@@ -283,7 +290,7 @@ export class chapter1 extends Phaser.Scene {
                 this.text.setText('Mom: \n\n  thanks mom ..').setPosition(this.text.x,this.text.y);            
                 this.currentHP = 100;
                 break;
-            case 8:
+            case 12:
                 this.text.setText('').setPosition(this.text.x,this.text.y);
                 this.momP.setDepth(-4);
                 this.alsetP.setDepth(-4);
@@ -337,21 +344,33 @@ export class chapter1 extends Phaser.Scene {
             }
         }else if(Phaser.Math.Distance.Between(this.alset.x, this.alset.y, this.powerBoxBroken.x, this.powerBoxBroken.y) < 70){
             this.powerBoxFunc();
-            if(Phaser.Input.Keyboard.JustDown(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)) && (this.powerBoxNum<1 || this.powerBoxNum== 6|| this.powerBoxNum==7) ){
+            if(Phaser.Input.Keyboard.JustDown(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)) && (this.powerBoxNum<1 || this.powerBoxNum> 9) ){
                 this.powerBoxNum = this.powerBoxNum + 1;                
-            }else if(Phaser.Input.Keyboard.JustDown(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.T)) && this.powerBoxNum==1) {
+            }else if(this.powerBoxNum==1 && Phaser.Input.Keyboard.JustDown(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.I)) ) {
                 this.powerBoxNum = this.powerBoxNum + 1;  
             }
-            else if(Phaser.Input.Keyboard.JustDown(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R)) && this.powerBoxNum==2) {
+            else if(  this.powerBoxNum==2 && Phaser.Input.Keyboard.JustDown(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.L))) {
                 this.powerBoxNum = this.powerBoxNum + 1;  
             }
-            else if(Phaser.Input.Keyboard.JustDown(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A)) && this.powerBoxNum==3) {
+            else if(  this.powerBoxNum==3 && Phaser.Input.Keyboard.JustDown(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.L)) ) {
                 this.powerBoxNum = this.powerBoxNum + 1;  
             }
-            else if(Phaser.Input.Keyboard.JustDown(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S)) && this.powerBoxNum==4) {
+            else if(this.powerBoxNum==4 && Phaser.Input.Keyboard.JustDown(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.B))  ) {
                 this.powerBoxNum = this.powerBoxNum + 1;  
             }
-            else if(Phaser.Input.Keyboard.JustDown(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.H)) && this.powerBoxNum==5) {
+            else if(this.powerBoxNum==5 && Phaser.Input.Keyboard.JustDown(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E)) ) {
+                this.powerBoxNum = this.powerBoxNum + 1;  
+            }
+            else if(this.powerBoxNum==6 && Phaser.Input.Keyboard.JustDown(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.B)) ) {
+                this.powerBoxNum = this.powerBoxNum + 1;  
+            }
+            else if(this.powerBoxNum==7 && Phaser.Input.Keyboard.JustDown(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A)) ) {
+                this.powerBoxNum = this.powerBoxNum + 1;  
+            }
+            else if(this.powerBoxNum==8 && Phaser.Input.Keyboard.JustDown(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.C)) ) {
+                this.powerBoxNum = this.powerBoxNum + 1;  
+            }
+            else if(this.powerBoxNum==9 && Phaser.Input.Keyboard.JustDown(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.K)) ) {
                 this.powerBoxNum = this.powerBoxNum + 1;  
             }
 
