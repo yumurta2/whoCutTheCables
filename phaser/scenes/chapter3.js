@@ -116,7 +116,7 @@ export class chapter3 extends Phaser.Scene {
         this.didFix=false;
         this.timeBarBg = this.add.image(this.text.x-1000,this.text.y-200, 'timeBarBg').setDepth(15);
         this.timeBarFg = this.add.image(this.text.x-1000,this.text.y-200, 'timeBarFg').setDepth(16);
-        this.currentHP = 100;
+        this.currentHP = 200;
         this.start = true;
         this.startNum = 0;
 
@@ -284,7 +284,7 @@ export class chapter3 extends Phaser.Scene {
                 this.momP.y = this.text.y-100;
                 this.alsetP.y = this.text.y-100;
                 this.momP.setDepth(14);
-                this.currentHP = 100;
+                this.currentHP = 200;
                 this.text.setText('Mom: \n\n  Well done son\n\n  You made it').setPosition(this.text.x,this.text.y);           
 
                 break;
@@ -296,7 +296,7 @@ export class chapter3 extends Phaser.Scene {
                 this.alsetP.x = this.text.x-150;
                 this.alsetP.setDepth(14);
                 this.text.setText('Mom: \n\n  thanks mom ..').setPosition(this.text.x,this.text.y);            
-                this.currentHP = 100;
+                this.currentHP = 200;
                 break;
             case 12:
                 this.text.setText('').setPosition(this.text.x,this.text.y);
@@ -306,7 +306,7 @@ export class chapter3 extends Phaser.Scene {
                 this.momDialog = 0;
                 this.momP.x = -1000;
                 this.alsetP.x = -1000;
-                this.currentHP = 100;
+                this.currentHP = 200;
                 this.timeBarBg.x = this.text.x -2000;
                 this.timeBarFg.x = this.text.x -2000;
                 this.powerBox = false;
@@ -320,7 +320,7 @@ export class chapter3 extends Phaser.Scene {
             break;
 
             default:
-                this.currentHP = 100;
+                this.currentHP = 200;
                 this.timeBarBg.x = this.text.x -2000;
                 this.timeBarFg.x = this.text.x -2000;
                 this.powerBox = false;
@@ -336,16 +336,15 @@ export class chapter3 extends Phaser.Scene {
     onStartUpdate(){
         switch(this.startNum){
             case 0:
-            this.text.setText('Alset: \n\n  wait What?').setPosition(this.text.x,this.text.y);
-
+            this.text.setText('Alset:\n\n  Ahh! It hurts..').setPosition(this.text.x,this.text.y);
             this.alsetP.x = this.text.x-150;
             this.alsetP.setDepth(14);
             break;
             case 1:
-            this.text.setText('Alset: \n\n  How did i get here?').setPosition(this.text.x,this.text.y);
+            this.text.setText('Alset:\n\n  How did i get here?').setPosition(this.text.x,this.text.y);
             break;
             case 2:
-            this.text.setText('Alset: \n\n  What happened to our house\n\n  What are those on the walls?').setPosition(this.text.x,this.text.y);
+            this.text.setText('Alset:\n\n  What happened to our house\n\n  What are those on the walls?').setPosition(this.text.x,this.text.y);
             break;
             case 3:
             this.start = false;
@@ -364,7 +363,7 @@ export class chapter3 extends Phaser.Scene {
         if(this.coundown){
             if(this.currentHP>0){
                 this.currentHP -= 0.5;
-                this.timeBarFg.scaleX = this.currentHP / 100;
+                this.timeBarFg.scaleX = this.currentHP / 200;
             }
             else{
                 this.anaTemaHizli.stop();

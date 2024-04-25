@@ -23,14 +23,14 @@ export class chapter0 extends Phaser.Scene {
  
         this.bulb = this.add.image(350, 150, 'bulb').setDepth(6);
         this.darkenOverlay = this.add.graphics();
-
+        this.darkenOverlay.fillStyle(0x000000, 0.8); 
+        this.darkenOverlay.fillRect(0, 0, this.game.config.width, this.game.config.height);
+        this.darkenOverlay.setDepth(5); 
         this.map = this.add.graphics();
         this.map.fillStyle(0x000000, 1); 
         this.map.fillRect(0, 0, this.game.config.width, this.game.config.height).setDepth(1);
 
-        this.darkenOverlay.fillStyle(0x000000, 0.8); 
-        this.darkenOverlay.fillRect(0, 0, this.game.config.width, this.game.config.height);
-        this.darkenOverlay.setDepth(5); 
+
         this.alset = this.physics.add.sprite(250, 200, 'alsetIdleRight').setDepth(3);
         this.mom = this.physics.add.sprite(500, 200, 'mom').setDepth(3);
         this.textArr=[0,false];
@@ -89,12 +89,12 @@ update() {
                 this.isBulb = true;
                 break;
             case 5:
-                this.text.setText('Mom: Something is wrong \n\nwith electrics').setPosition(this.text.x,this.text.y);
+                this.text.setText('Mom:\n\n  Something is wrong \n\n  with electrics').setPosition(this.text.x,this.text.y);
                 this.alsetP.setDepth(-4);
                 this.momP.setDepth(4);
                 break;
             case 6:
-                this.text.setText('Alset: Close the lights !').setPosition(this.text.x,this.text.y);
+                this.text.setText('Alset:\n\n  Close the lights !').setPosition(this.text.x,this.text.y);
                 this.alsetP.setDepth(4);
                 this.momP.setDepth(-4);
                 break;
@@ -102,14 +102,14 @@ update() {
                 this.bulb.destroy();
                 this.bulb = this.add.image(350, 150, 'bulbK').setDepth(6);
                 this.sound.play('ampulPat');
-                this.text.setText('Alset: Too late . . .').setPosition(this.text.x,this.text.y);
+                this.text.setText('Alset:\n\n  Too late . . .').setPosition(this.text.x,this.text.y);
                 this.radiusMultiplier = 50;
                 this.brighteningColor = 0xffaa33;
                 this.brighteningAlpha = 0.02;
                 this.darkenOverlay.setDepth(10);
                 break;
             case 8:
-                this.text.setText('Mom: get this flashlight').setPosition(this.text.x,this.text.y);
+                this.text.setText('Mom:\n\n Take this flashlight, son').setPosition(this.text.x,this.text.y);
                 this.alsetP.setDepth(-4);
                 this.momP.setDepth(4);
                 break;

@@ -113,8 +113,7 @@ export class chapter1 extends Phaser.Scene {
         this.didFix=false;
         this.timeBarBg = this.add.image(this.text.x-1000,this.text.y-200, 'timeBarBg').setDepth(15);
         this.timeBarFg = this.add.image(this.text.x-1000,this.text.y-200, 'timeBarFg').setDepth(16);
-        this.currentHP = 100;
-
+        this.currentHP = 200;
     }
     updateMovement(){
         if(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D).isDown && !this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A).isDown){
@@ -152,7 +151,7 @@ export class chapter1 extends Phaser.Scene {
                 break;
             case 2:
                 this.dialogWithMom = true;
-                this.text.setText('Mom: \n\n  And trying to talk to me ?!').setPosition(this.text.x,this.text.y);
+                this.text.setText(`Mom: \n\n  Don't waste your time`).setPosition(this.text.x,this.text.y);
                 this.momP.setDepth(14);
         
                 break;
@@ -244,52 +243,51 @@ export class chapter1 extends Phaser.Scene {
                 this.timeBarBg.x = this.text.x +150;
                 this.timeBarFg.x = this.text.x +150;
 
-                this.text.setText('I').setPosition(this.text.x,this.text.y);
+                this.text.setText('I').setPosition(this.text.x+100,this.text.y)
+                this.text.style.setFontSize('64px');
                 break;
             case 2:
-                this.text.setText('L').setPosition(this.text.x,this.text.y);            
+                this.text.setText('L').setPosition(this.text.x+100,this.text.y);            
                 break;
             case 3:
-                this.text.setText('LL').setPosition(this.text.x,this.text.y);            
+                this.text.setText('LL').setPosition(this.text.x+100,this.text.y);            
                 break;
             case 4:
-                this.text.setText('B').setPosition(this.text.x,this.text.y);            
+                this.text.setText('B').setPosition(this.text.x+100,this.text.y);            
                 break;
             case 5:
-                this.text.setText('E').setPosition(this.text.x,this.text.y);            
+                this.text.setText('E').setPosition(this.text.x+100,this.text.y);            
                 break;
             case 6:
-                this.text.setText('B').setPosition(this.text.x,this.text.y);            
+                this.text.setText('B').setPosition(this.text.x+100,this.text.y);            
                 break;
             case 7:
-                this.text.setText('A').setPosition(this.text.x,this.text.y);            
+                this.text.setText('A').setPosition(this.text.x+100,this.text.y);            
                 break;
             case 8:
-                this.text.setText('C').setPosition(this.text.x,this.text.y);            
+                this.text.setText('C').setPosition(this.text.x+100,this.text.y);            
                 break;
             case 9:
-                this.text.setText('K').setPosition(this.text.x,this.text.y);            
+                this.text.setText('K').setPosition(this.text.x+100,this.text.y);            
                 break;
             case 10:
-
+                this.text.style.setFontSize('18px');
                 this.coundown = false;
                 this.momP.x = this.text.x+450;
                 this.momP.y = this.text.y-100;
                 this.alsetP.y = this.text.y-100;
                 this.momP.setDepth(14);
-                this.currentHP = 100;
+                this.currentHP = 200;
                 this.text.setText('Mom: \n\n  Well done son\n\n  You made it').setPosition(this.text.x,this.text.y);           
-
                 break;
             case 11:
-
                 this.text.setText('Alset: \n\n  thanks mom..').setPosition(this.text.x,this.text.y);
                 this.momP.setDepth(-4);
                 this.momP.x = -1000;
                 this.alsetP.x = this.text.x-150;
                 this.alsetP.setDepth(14);
                 this.text.setText('Mom: \n\n  thanks mom ..').setPosition(this.text.x,this.text.y);            
-                this.currentHP = 100;
+                this.currentHP = 200;
                 break;
             case 12:
                 this.text.setText('').setPosition(this.text.x,this.text.y);
@@ -299,7 +297,7 @@ export class chapter1 extends Phaser.Scene {
                 this.momDialog = 0;
                 this.momP.x = -1000;
                 this.alsetP.x = -1000;
-                this.currentHP = 100;
+                this.currentHP = 200;
                 this.timeBarBg.x = this.text.x -2000;
                 this.timeBarFg.x = this.text.x -2000;
                 this.powerBox = false;
@@ -311,9 +309,8 @@ export class chapter1 extends Phaser.Scene {
                 this.didFix = true;
 
             break;
-
             default:
-                this.currentHP = 100;
+                this.currentHP = 200;
                 this.timeBarBg.x = this.text.x -2000;
                 this.timeBarFg.x = this.text.x -2000;
                 this.powerBox = false;
@@ -330,7 +327,7 @@ export class chapter1 extends Phaser.Scene {
         if(this.coundown){
             if(this.currentHP>0){
                 this.currentHP -= 0.5;
-                this.timeBarFg.scaleX = this.currentHP / 100;
+                this.timeBarFg.scaleX = this.currentHP / 200;
             }
             else{
                 this.anaTemaHizli.stop();

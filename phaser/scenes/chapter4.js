@@ -97,7 +97,7 @@ export class chapter4 extends Phaser.Scene {
         this.physics.world.setBounds(150, 0, 500, 300);
         this.timeBarBg = this.add.image(this.text.x-1000,this.text.y-200, 'timeBarBg').setDepth(15);
         this.timeBarFg = this.add.image(this.text.x-1000,this.text.y-200, 'timeBarFg').setDepth(16);
-        this.currentHP = 100;
+        this.currentHP = 200;
         this.musicChange = false;
     }
     updateMovement(){
@@ -126,7 +126,7 @@ export class chapter4 extends Phaser.Scene {
                 this.text.setText('press SPACE to interact').setPosition(this.text.x,this.text.y);
                 break;
             case 1:
-                this.text.setText('Sis:\n\n  What are you doing?').setPosition(this.text.x,this.text.y);
+                this.text.setText('Sis:\n\n  What are you doing ?!').setPosition(this.text.x,this.text.y);
                 if(this.musicChange == false){
                     this.anaTemaHizli.stop();
                     this.anaTemaYavas.play();
@@ -137,22 +137,22 @@ export class chapter4 extends Phaser.Scene {
                 this.sis.x = 600;
                 break;
             case 2:
-                this.text.setText('Alset:\n\n  you scared me\n\n  Where did you come from').setPosition(this.text.x,this.text.y);
+                this.text.setText('Alset:\n\n  You scared me\n\n  Where did you come from?').setPosition(this.text.x,this.text.y);
                 this.sisP.x = -1000;
                 this.alsetP.x = this.text.x-150;
                 break;
             case 3:
-                this.text.setText(`Sis:\n\n  Didn't you notice me\n\n  I've been following you\n\n  from the beginning`).setPosition(this.text.x,this.text.y);
+                this.text.setText(`Sis:\n\n  Didn't you notice me\n\n  I've been following you`).setPosition(this.text.x,this.text.y);
                 this.sisP.x = this.text.x+400;
                 this.alsetP.x = -1000;
                 break;
             case 4:
-                this.text.setText(`Alset:\n\n  Then why did you ask what I did \n\n  I'm trying to fix power boxes`).setPosition(this.text.x,this.text.y);
+                this.text.setText(`Alset:\n\n  Then why did you ask what am I doing \n\n  I'm trying to fix powerboxes`).setPosition(this.text.x,this.text.y);
                 this.sisP.x = -1000;
                 this.alsetP.x = this.text.x-150;
                 break;
             case 5:
-                this.text.setText('Sis:\n\n  Dont\n\n  They cannot live\n\n  in the light').setPosition(this.text.x,this.text.y);
+                this.text.setText(`Sis:\n\n  Don't!\n\n  Something is wrong..`).setPosition(this.text.x,this.text.y);
                 this.sisP.x = this.text.x+400;
                 this.alsetP.x = -1000;
                 break;
@@ -162,7 +162,7 @@ export class chapter4 extends Phaser.Scene {
                 this.alsetP.x = this.text.x-150;
                 break;
             case 7:
-                this.text.setText(`Sis:\n\n  It is not mom!`).setPosition(this.text.x,this.text.y);
+                this.text.setText(`Sis:\n\n  It's not mom!`).setPosition(this.text.x,this.text.y);
                 this.sisP.x = this.text.x+400;
                 this.alsetP.x = -1000;
                 break;
@@ -180,7 +180,7 @@ export class chapter4 extends Phaser.Scene {
         if(this.coundown){
             if(this.currentHP>0){
                 this.currentHP -= 0.5;
-                this.timeBarFg.scaleX = this.currentHP / 100;
+                this.timeBarFg.scaleX = this.currentHP / 200;
             }
             else{
                 this.anaTemaHizli.stop();

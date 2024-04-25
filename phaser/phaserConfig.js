@@ -7,6 +7,7 @@ import { chapter3 } from './scenes/chapter3.js';
 import { chapter4 } from './scenes/chapter4.js';
 import { chapter5 } from './scenes/chapter5.js';
 import { chapter6 } from './scenes/chapter6.js';
+import { end } from './scenes/end.js';
 import { youDied } from './scenes/youDied.js';
 const config = {
     type: Phaser.AUTO,
@@ -19,7 +20,7 @@ const config = {
             debug: false
         }
     },
-    scene: [opening,menu,chapter0,chapter1,chapter2,chapter3,chapter4,chapter5,chapter6,youDied],
+    scene: [opening,menu,chapter0,chapter1,chapter2,chapter3,chapter4,chapter5,chapter6,youDied,end],
     audio: {
         disableWebAudio: true,
         noAudio: false,

@@ -11,7 +11,7 @@ export class menu extends Phaser.Scene {
         this.menuMusic = this.sound.add('menuMusic', { loop: true });
 
         this.menuMusic.play();
-        this.thumbnail = this.add.image(350, 250, 'thumbnail').setDepth(0);
+        this.thumbnail = this.add.image(300, 250, 'thumbnail').setDepth(0);
         this.chapter0 = this.add.text(100, 50, 'chapter0', { fill: '#ffffff', fontSize: '24px' })
             .setInteractive()
             .on('pointerdown', () => {
@@ -74,6 +74,15 @@ export class menu extends Phaser.Scene {
             })
             .on('pointerover', () => this.chapter6.setBackgroundColor('#ff0000'))
             .on('pointerout', () => this.chapter6.setBackgroundColor(''));
+        this.end = this.add.text(300, 150, 'end', { fill: '#ffffff', fontSize: '24px' })
+            .setInteractive()
+            .on('pointerdown', () => {
+                this.menuMusic.stop();
+
+                this.scene.start('end');
+            })
+            .on('pointerover', () => this.end.setBackgroundColor('#ff0000'))
+            .on('pointerout', () => this.end.setBackgroundColor(''));
 
         this.youDied = this.add.text(600, 350, 'youDied', { fill: '#ffffff', fontSize: '24px' })
             .setInteractive()
