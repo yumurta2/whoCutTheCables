@@ -25,8 +25,10 @@ export class chapter6 extends Phaser.Scene {
         this.load.image('timeBarFg', 'assets/ui/timeBarFg.png');
         this.load.image('timeBarBg', 'assets/ui/timeBarBg.png');
         this.load.audio('anaTemaHizli', 'assets/sounds/anaTemaHizli.wav');
+        this.load.audio('anaTemaYavas', 'assets/sounds/anaTemaYavas.wav');
         this.load.spritesheet('sis', 'assets/characters/sister/idleLeft32x64.png', { frameWidth: 32, frameHeight: 64 });
         this.load.spritesheet('sisR', 'assets/characters/sister/idleRight32x64.png', { frameWidth: 32, frameHeight: 64 });
+        this.load.audio('ElektrikPanel', 'assets/sounds/ElektrikPanel.wav');
 
         // this.load.image("roomTileSet", "assets/maps/room/tileset.png");
         // this.load.tilemapTiledJSON('roomTilemap', "assets/maps/room/tilemap.json");
@@ -43,10 +45,12 @@ export class chapter6 extends Phaser.Scene {
         //this.brighteningCircle[1].setDepth(13);
     }
     create() {
+        this.panel = this.sound.add('ElektrikPanel', { loop: true });
 
         this.anaTemaHizli = this.sound.add('anaTemaHizli', { loop: true });
+        this.anaTemaYavas = this.sound.add('anaTemaHizli', { loop: true });
 
-        this.anaTemaHizli.play();
+        this.anaTemaYavas.play();
         this.alsetP = this.add.image(-1000, 250, 'alsetP').setDepth(14);
         this.momP = this.add.image(-1000, 250, 'roboMomP').setDepth(14);
         this.sisP = this.add.image(-1000, 250, 'sisP').setDepth(14);
@@ -173,35 +177,44 @@ export class chapter6 extends Phaser.Scene {
                 break;
             case 1:
                 this.dialogWithMom = true;
-                this.text.setText('Mom: \n\n  You are still here ?!').setPosition(this.text.x,this.text.y);
-                this.sisP.x = this.text.x+450;
-                this.sisP.y = this.text.y-100;
+                this.text.setText(`Sis: \n\n  Can't believe\n\n  What I see anymore`).setPosition(this.text.x-50,this.text.y);
+                this.sisP.x = this.text.x+460;
+                this.sisP.y = this.text.y-50;
                 this.alsetP.y = this.text.y-100;
-                this.momP.setDepth(14);
+  
                 break;
             case 2:
                 this.dialogWithMom = true;
-                this.text.setText('Mom: \n\n  And trying to talk to me ?!').setPosition(this.text.x,this.text.y);
-                this.sisP.setDepth(14);
-        
+                this.text.setText('Sis: \n\n  You have to help her').setPosition(this.text.x-50,this.text.y);
                 break;
             case 3:
                 this.dialogWithMom = true;
-                this.text.setText('Mom: \n\n  Hurry fix the electrics !').setPosition(this.text.x,this.text.y);
-                this.sisP.setDepth(14);
+                this.text.setText(`Sis: \n\n  Please don't ask any questions`).setPosition(this.text.x-50,this.text.y);
+
                 break;
             case 4:
                 this.dialogWithMom = true;
-                this.text.setText('Alset: \n\n  Sorry mom..').setPosition(this.text.x,this.text.y);
+                this.text.setText(`Sis: \n\n  You'll understand\n\n  When you go to her`).setPosition(this.text.x-50,this.text.y);
+
+                break;
+            case 5:
+                this.dialogWithMom = true;
+                this.text.setText(`Alset: \n\n  I don't understand you anymore`).setPosition(this.text.x,this.text.y);
                 this.sisP.setDepth(-4);
                 this.sisP.x = -1000;
                 this.alsetP.x = this.text.x-150;
                 this.alsetP.setDepth(14);
                 break;
-            case 5:
+            case 6:
+                this.text.setText(`Alset: \n\n  But I will go check mom anyways.`).setPosition(this.text.x,this.text.y);
+
+                this.sisP.x = -1000;
+
+
+                break;
+            case 7:
                 this.text.setText('').setPosition(this.text.x,this.text.y);
-                this.sisP.setDepth(-4);
-                this.alsetP.setDepth(-4);
+
                 this.sisP.x = -1000;
                 this.alsetP.x = -1000;
                 this.dialogWithMom = false;
@@ -238,6 +251,8 @@ export class chapter6 extends Phaser.Scene {
                 this.text.setText('Mom?:\n\n  Me').setPosition(this.text.x,this.text.y);
                 break;
             case 1:
+                this.anaTemaYavas.stop();
+                this.panel.play();
                 this.powerBox = true;
                 this.coundown = true;
                 this.timeBarBg.x = this.text.x +150;
@@ -291,6 +306,8 @@ export class chapter6 extends Phaser.Scene {
                 this.text.setText('Y').setPosition(this.text.x,this.text.y);            
                 break;
             case 17:
+                this.anaTemaYavas.play();
+                this.panel.stop();
                 this.text.style.setFontSize('18px');
                 this.coundown = false;
                 this.momP.x = this.text.x+450;
@@ -298,11 +315,11 @@ export class chapter6 extends Phaser.Scene {
                 this.alsetP.y = this.text.y-100;
                 this.momP.setDepth(14);
                 this.currentHP = 200;
-                this.text.setText('Mom: \n\n  Well done son\n\n  You made it').setPosition(this.text.x,this.text.y);           
-
+                this.text.setText('Mom:\n\n  You restored my power').setPosition(this.text.x,this.text.y);
                 break;
             case 18:
-
+                this.anaTemaYavas.stop();
+                this.scene.start('end');
                 this.text.setText('Alset: \n\n  thanks mom..').setPosition(this.text.x,this.text.y);
                 this.momP.setDepth(-4);
                 this.momP.x = -1000;
@@ -353,7 +370,8 @@ export class chapter6 extends Phaser.Scene {
                 this.timeBarFg.scaleX = this.currentHP / 200;
             }
             else{
-                this.anaTemaHizli.stop();
+                this.anaTemaYavas.stop();
+                this.panel.stop();
                 this.scene.start('youDied');
             }
         }

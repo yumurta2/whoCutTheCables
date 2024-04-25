@@ -38,9 +38,7 @@ export class chapter3 extends Phaser.Scene {
         //this.brighteningCircle[1].setDepth(13);
     }
     create() {
-        this.anaTemaHizli = this.sound.add('anaTemaHizli', { loop: true });
 
-        this.anaTemaHizli.play();
         this.anaTemaHizli = this.sound.add('anaTemaHizli', { loop: true });
 
         this.anaTemaHizli.play();
