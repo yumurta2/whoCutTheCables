@@ -149,7 +149,7 @@ export class chapter3 extends Phaser.Scene {
                 break;
             case 1:
                 this.dialogWithMom = true;
-                this.text.setText('Mom: \n\n  et sollicitudin ac orci').setPosition(this.text.x,this.text.y);
+                this.text.setText('Mom: \n\n  I feel like\n\n  you repaired 2 powerboxes').setPosition(this.text.x,this.text.y);
                 this.momP.x = this.text.x+450;
                 this.momP.y = this.text.y-100;
                 this.alsetP.y = this.text.y-100;
@@ -157,18 +157,23 @@ export class chapter3 extends Phaser.Scene {
                 break;
             case 2:
                 this.dialogWithMom = true;
-                this.text.setText('Mom: \n\n  morbi enim nunc faucibus a').setPosition(this.text.x,this.text.y);
+                this.text.setText('Alset: \n\n  you felt?').setPosition(this.text.x,this.text.y);
                 this.momP.setDepth(14);
-        
+                this.momP.x = -1000;
+                this.alsetP.x = this.text.x-150;
+                this.alsetP.setDepth(14);
                 break;
             case 3:
                 this.dialogWithMom = true;
-                this.text.setText('Mom: \n\n  mi ipsum faucibus vitae').setPosition(this.text.x,this.text.y);
+                this.text.setText('Mom: \n\n  yea it felt awesome').setPosition(this.text.x,this.text.y);
                 this.momP.setDepth(14);
+                this.momP.x = this.text.x+450;
+                this.alsetP.x =-1000;
+                this.alsetP.setDepth(14);
                 break;
             case 4:
                 this.dialogWithMom = true;
-                this.text.setText('Alset: \n\n  tempus egestas sed sed').setPosition(this.text.x,this.text.y);
+                this.text.setText('Alset: \n\n  nevermind').setPosition(this.text.x,this.text.y);
                 this.momP.setDepth(-4);
                 this.momP.x = -1000;
                 this.alsetP.x = this.text.x-150;
