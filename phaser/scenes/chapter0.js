@@ -16,8 +16,7 @@ export class chapter0 extends Phaser.Scene {
         // this.load.tilemapTiledJSON('roomTilemap', "assets/maps/room/tilemap.json");
     }
     create() {
-        this.MenuMusic = this.sound.add('MenuMusic', { loop: true });
-        this.MenuMusic.play();
+
         this.alsetP = this.add.image(100, 250, 'alsetP').setDepth(-3);
         this.momP = this.add.image(650, 250, 'momP').setDepth(-3);
  

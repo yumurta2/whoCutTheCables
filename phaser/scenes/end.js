@@ -5,7 +5,7 @@ export class end extends Phaser.Scene {
     preload() {
         this.load.spritesheet('alsetIdleRight', 'assets//characters/alset/idle32x64right.png', { frameWidth: 32, frameHeight: 64 });
         this.load.spritesheet('momrobo', 'assets/characters/mom/momrobot32x64-Sheet.png', { frameWidth: 32, frameHeight: 64 });
-        this.load.spritesheet('sis', 'assets/characters/sister/idleRight32x64.png', { frameWidth: 32, frameHeight: 64 });
+        this.load.spritesheet('sis', 'assets/characters/sister/idleLeft32x64.png', { frameWidth: 32, frameHeight: 64 });
         this.load.image('bulb', 'assets/objects/sk_kapal.png');
         this.load.image('bulbK', 'assets/objects/sk_kirik.png');
         this.load.image('alsetP', 'assets/portraits/alset.png');

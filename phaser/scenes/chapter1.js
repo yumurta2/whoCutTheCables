@@ -115,7 +115,7 @@ export class chapter1 extends Phaser.Scene {
         this.didFix=false;
         this.timeBarBg = this.add.image(this.text.x-1000,this.text.y-200, 'timeBarBg').setDepth(15);
         this.timeBarFg = this.add.image(this.text.x-1000,this.text.y-200, 'timeBarFg').setDepth(16);
-        this.currentHP = 200;
+        this.currentHP = 300;
         this.reMusic = false;
     }
     updateMovement(){
@@ -289,7 +289,7 @@ export class chapter1 extends Phaser.Scene {
                 this.momP.y = this.text.y-100;
                 this.alsetP.y = this.text.y-100;
                 this.momP.setDepth(14);
-                this.currentHP = 200;
+                this.currentHP = 300;
                 this.text.setText('Mom: \n\n  Well done son\n\n  You made it').setPosition(this.text.x,this.text.y);           
                 break;
             case 11:
@@ -299,7 +299,7 @@ export class chapter1 extends Phaser.Scene {
                 this.alsetP.x = this.text.x-150;
                 this.alsetP.setDepth(14);
                 this.text.setText('Mom: \n\n  thanks mom ..').setPosition(this.text.x,this.text.y);            
-                this.currentHP = 200;
+                this.currentHP = 300;
                 break;
             case 12:
                 this.text.setText('').setPosition(this.text.x,this.text.y);
@@ -309,7 +309,7 @@ export class chapter1 extends Phaser.Scene {
                 this.momDialog = 0;
                 this.momP.x = -1000;
                 this.alsetP.x = -1000;
-                this.currentHP = 200;
+                this.currentHP = 300;
                 this.timeBarBg.x = this.text.x -2000;
                 this.timeBarFg.x = this.text.x -2000;
                 this.powerBox = false;
@@ -322,7 +322,7 @@ export class chapter1 extends Phaser.Scene {
 
             break;
             default:
-                this.currentHP = 200;
+                this.currentHP = 300;
                 this.timeBarBg.x = this.text.x -2000;
                 this.timeBarFg.x = this.text.x -2000;
                 this.powerBox = false;
@@ -339,7 +339,7 @@ export class chapter1 extends Phaser.Scene {
         if(this.coundown){
             if(this.currentHP>0){
                 this.currentHP -= 0.5;
-                this.timeBarFg.scaleX = this.currentHP / 200;
+                this.timeBarFg.scaleX = this.currentHP / 300;
             }
             else{
 

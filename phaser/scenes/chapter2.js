@@ -96,7 +96,7 @@ export class chapter2 extends Phaser.Scene {
         this.physics.world.setBounds(0, 0, 800, 300);
         this.timeBarBg = this.add.image(this.text.x-1000,this.text.y-200, 'timeBarBg').setDepth(15);
         this.timeBarFg = this.add.image(this.text.x-1000,this.text.y-200, 'timeBarFg').setDepth(16);
-        this.currentHP = 200;
+        this.currentHP = 300;
         this.reMusic = false;
     }
     updateMovement(){
@@ -186,7 +186,7 @@ export class chapter2 extends Phaser.Scene {
         if(this.coundown){
             if(this.currentHP>0){
                 this.currentHP -= 0.5;
-                this.timeBarFg.scaleX = this.currentHP / 200;
+                this.timeBarFg.scaleX = this.currentHP / 300;
             }
             else{
                 this.anaTemaHizli.stop();
