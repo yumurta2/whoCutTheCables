@@ -18,6 +18,7 @@ export class chapter5 extends Phaser.Scene {
         // this.load.tilemapTiledJSON('roomTilemap', "assets/maps/room/tilemap.json");
     }
     create() {
+        this.game.canvas.style.cursor = "none";
         this.anaTemaYavas = this.sound.add('anaTemaYavas', { loop: true });
         this.anaTemaYavas.play();
         this.alsetP = this.add.image(100, 250, 'alsetP').setDepth(-3);
@@ -84,19 +85,19 @@ update() {
                 this.text.setText('Alset:\n\n  ZzZz . . .');
                 break;
             case 3:
-                this.text.setText('Sis:\n\n  Wake Up!').setPosition(this.text.x,this.text.y);
+                this.text.setText('Sis:\n\n  Wake Up!').setPosition(this.text.x-20,this.text.y);
                 this.alsetP.setDepth(-4);
                 this.sisP.setDepth(4);
                 break;
             case 4:
-                this.text.setText('Alset:\n\n  How did I fall asleep again ?!').setPosition(this.text.x,this.text.y);
+                this.text.setText('Alset:\n\n  How did I fall asleep again ?!').setPosition(this.text.x+20,this.text.y);
 
                 this.alsetP.setDepth(4);
                 this.sisP.setDepth(-4);
 
                 break;
             case 5:
-                this.text.setText('Sis:\n\n  Something..\n\n  keeps turning on the lights').setPosition(this.text.x,this.text.y);
+                this.text.setText('Sis:\n\n  Something..\n\n  keeps turning on the lights').setPosition(this.text.x-20,this.text.y);
                 this.alsetP.setDepth(-4);
                 this.sisP.setDepth(4);
                 break;
@@ -106,17 +107,17 @@ update() {
                 this.sisP.setDepth(4);
                 break;
             case 7:
-                this.text.setText(`Alset:\n\n  {It? Is she talking about me?}`).setPosition(this.text.x,this.text.y);
+                this.text.setText(`Alset:\n\n  {It? Is she talking about me?}`).setPosition(this.text.x+20,this.text.y);
                 this.alsetP.setDepth(4);
                 this.sisP.setDepth(-4);
                 break;
             case 8:
-                this.text.setText('Sis:\n\n  What did you say?').setPosition(this.text.x,this.text.y);
+                this.text.setText('Sis:\n\n  What did you say?').setPosition(this.text.x-20,this.text.y);
                 this.alsetP.setDepth(-4);
                 this.sisP.setDepth(4);
                 break;
             case 9:
-                this.text.setText(`Alset:\n\n  Nothing..`).setPosition(this.text.x,this.text.y);
+                this.text.setText(`Alset:\n\n  Nothing..`).setPosition(this.text.x+20,this.text.y);
                 this.alsetP.setDepth(4);
                 this.sisP.setDepth(-4);
                 break;

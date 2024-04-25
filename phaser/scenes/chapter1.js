@@ -116,6 +116,7 @@ export class chapter1 extends Phaser.Scene {
         this.timeBarBg = this.add.image(this.text.x-1000,this.text.y-200, 'timeBarBg').setDepth(15);
         this.timeBarFg = this.add.image(this.text.x-1000,this.text.y-200, 'timeBarFg').setDepth(16);
         this.currentHP = 200;
+        this.reMusic = false;
     }
     updateMovement(){
         if(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D).isDown && !this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A).isDown){
@@ -275,8 +276,13 @@ export class chapter1 extends Phaser.Scene {
                 this.text.setText('K').setPosition(this.text.x+100,this.text.y);            
                 break;
             case 10:
-                this.anaTemaHizli.play();
-                this.panel.stop();
+
+                if(!this.reMusic){
+                    this.anaTemaHizli.play();
+                    this.panel.stop();
+                    this.reMusic = true;
+                }
+
                 this.text.style.setFontSize('18px');
                 this.coundown = false;
                 this.momP.x = this.text.x+450;

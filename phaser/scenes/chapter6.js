@@ -8,7 +8,7 @@ export class chapter6 extends Phaser.Scene {
         this.load.spritesheet('alsetRight', 'assets/characters/alset/right32x64.png', { frameWidth: 32, frameHeight: 64 });
         this.load.spritesheet('alsetLeft', 'assets/characters/alset/left32x64.png', { frameWidth: 32, frameHeight: 64 });
         this.load.image('invisWall', 'assets/invisWall.png');
-        this.load.spritesheet('mom', 'assets/characters/mom/momrobot32x64-Sheet.png', { frameWidth: 32, frameHeight: 64 });
+        this.load.spritesheet('momrobo', 'assets/characters/mom/momrobot32x64-Sheet.png', { frameWidth: 32, frameHeight: 64 });
         this.load.spritesheet('momters', 'assets/characters/mom/momidle32x64ters.png', { frameWidth: 32, frameHeight: 64 });
         this.load.image('mercek', 'assets/mercek.png');
         this.load.image('corridor', 'assets/maps/house/ep1/1corridor.png');
@@ -65,7 +65,7 @@ export class chapter6 extends Phaser.Scene {
         this.alset = this.physics.add.sprite(100, 200, 'alsetIdleRight').setDepth(4);
         this.alset.setCollideWorldBounds(true);
         this.sis = this.physics.add.sprite(300, 200, 'sis').setDepth(4);
-        this.mom = this.physics.add.sprite(1000, 200, 'mom').setDepth(4);
+        this.mom = this.physics.add.sprite(1000, 200, 'momrobo').setDepth(4);
         
         this.anims.create({
             key:'electricEfect',
@@ -84,7 +84,7 @@ export class chapter6 extends Phaser.Scene {
         });
         this.anims.create({
             key:'roboMomIdle',
-            frames:this.anims.generateFrameNumbers('mom', {start:0 , end:17}),
+            frames:this.anims.generateFrameNumbers('momrobo', {start:0 , end:17}),
             frameRate: 8,
         });
         this.anims.create({
@@ -148,6 +148,7 @@ export class chapter6 extends Phaser.Scene {
         this.timeBarFg = this.add.image(this.text.x-1000,this.text.y-200, 'timeBarFg').setDepth(16);
         this.currentHP = 200;
         this.momP.y = this.text.y-100;
+        this.reMusic = false;
     }
     updateMovement(){
         if(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D).isDown && !this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A).isDown){
@@ -177,7 +178,7 @@ export class chapter6 extends Phaser.Scene {
                 break;
             case 1:
                 this.dialogWithMom = true;
-                this.text.setText(`Sis: \n\n  Can't believe\n\n  What I see anymore`).setPosition(this.text.x-50,this.text.y);
+                this.text.setText(`Sis: \n\n  Can't believe what I see`).setPosition(this.text.x-50,this.text.y);
                 this.sisP.x = this.text.x+460;
                 this.sisP.y = this.text.y-50;
                 this.alsetP.y = this.text.y-100;
@@ -199,8 +200,7 @@ export class chapter6 extends Phaser.Scene {
                 break;
             case 5:
                 this.dialogWithMom = true;
-                this.text.setText(`Alset: \n\n  I don't understand you anymore`).setPosition(this.text.x,this.text.y);
-                this.sisP.setDepth(-4);
+                this.text.setText(`Alset: \n\n  I don't understand you\n\n  You sound crazy`).setPosition(this.text.x,this.text.y);
                 this.sisP.x = -1000;
                 this.alsetP.x = this.text.x-150;
                 this.alsetP.setDepth(14);
@@ -237,9 +237,11 @@ export class chapter6 extends Phaser.Scene {
     powerBoxFunc(){
         switch(this.powerBoxNum){
             case -3:
+                
                 this.text.setText('press SPACE to interact').setPosition(this.text.x,this.text.y);
                 break;
             case -2:
+                this.powerBox = true;
                 this.momP.x = this.text.x+450;
                 this.momP.setDepth(14);
                 this.text.setText('Mom?:\n\n  Please').setPosition(this.text.x,this.text.y);
@@ -253,7 +255,7 @@ export class chapter6 extends Phaser.Scene {
             case 1:
                 this.anaTemaYavas.stop();
                 this.panel.play();
-                this.powerBox = true;
+                
                 this.coundown = true;
                 this.timeBarBg.x = this.text.x +150;
                 this.timeBarFg.x = this.text.x +150;
@@ -306,8 +308,12 @@ export class chapter6 extends Phaser.Scene {
                 this.text.setText('Y').setPosition(this.text.x,this.text.y);            
                 break;
             case 17:
-                this.anaTemaYavas.play();
-                this.panel.stop();
+                if(!this.reMusic){
+                    this.anaTemaYavas.play();
+                    this.panel.stop();
+                    this.reMusic = true;
+                }
+
                 this.text.style.setFontSize('18px');
                 this.coundown = false;
                 this.momP.x = this.text.x+450;

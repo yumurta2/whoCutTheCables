@@ -126,7 +126,7 @@ export class chapter4 extends Phaser.Scene {
                 this.text.setText('press SPACE to interact').setPosition(this.text.x,this.text.y);
                 break;
             case 1:
-                this.text.setText('Sis:\n\n  What are you doing ?!').setPosition(this.text.x,this.text.y);
+                this.text.setText('Sis:\n\n  What are you doing ?!').setPosition(this.text.x-10,this.text.y);
                 if(this.musicChange == false){
                     this.anaTemaHizli.stop();
                     this.anaTemaYavas.play();
@@ -142,7 +142,7 @@ export class chapter4 extends Phaser.Scene {
                 this.alsetP.x = this.text.x-150;
                 break;
             case 3:
-                this.text.setText(`Sis:\n\n  Didn't you notice me\n\n  I've been following you`).setPosition(this.text.x,this.text.y);
+                this.text.setText(`Sis:\n\n  Didn't you notice me\n\n  I've been following you`).setPosition(this.text.x-10,this.text.y);
                 this.sisP.x = this.text.x+400;
                 this.alsetP.x = -1000;
                 break;
@@ -152,7 +152,7 @@ export class chapter4 extends Phaser.Scene {
                 this.alsetP.x = this.text.x-150;
                 break;
             case 5:
-                this.text.setText(`Sis:\n\n  Don't!\n\n  Something is wrong..`).setPosition(this.text.x,this.text.y);
+                this.text.setText(`Sis:\n\n  Don't!\n\n  Something is wrong..`).setPosition(this.text.x-10,this.text.y);
                 this.sisP.x = this.text.x+400;
                 this.alsetP.x = -1000;
                 break;
@@ -162,7 +162,7 @@ export class chapter4 extends Phaser.Scene {
                 this.alsetP.x = this.text.x-150;
                 break;
             case 7:
-                this.text.setText(`Sis:\n\n  It's not mom!`).setPosition(this.text.x,this.text.y);
+                this.text.setText(`Sis:\n\n  It's not mom!`).setPosition(this.text.x-10,this.text.y);
                 this.sisP.x = this.text.x+400;
                 this.alsetP.x = -1000;
                 break;
