@@ -113,7 +113,6 @@ update() {
                 this.momP.setDepth(4);
                 break;
             case 9:
-                this.MenuMusic.stop();
                 this.scene.start('chapter1');
                 break;
         }
