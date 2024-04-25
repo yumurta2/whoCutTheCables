@@ -65,6 +65,15 @@ export class menu extends Phaser.Scene {
             })
             .on('pointerover', () => this.chapter5.setBackgroundColor('#ff0000'))
             .on('pointerout', () => this.chapter5.setBackgroundColor(''));
+        this.chapter6 = this.add.text(300, 100, 'chapter6', { fill: '#ffffff', fontSize: '24px' })
+            .setInteractive()
+            .on('pointerdown', () => {
+                this.menuMusic.stop();
+
+                this.scene.start('chapter6');
+            })
+            .on('pointerover', () => this.chapter6.setBackgroundColor('#ff0000'))
+            .on('pointerout', () => this.chapter6.setBackgroundColor(''));
 
         this.youDied = this.add.text(600, 350, 'youDied', { fill: '#ffffff', fontSize: '24px' })
             .setInteractive()

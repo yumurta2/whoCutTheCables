@@ -13,10 +13,13 @@ export class chapter5 extends Phaser.Scene {
         this.load.image('sisP', 'assets/portraits/sister.png');
         this.load.audio('ampulAc', 'assets/sounds/ampulAc.wav');
         this.load.audio('ampulPat', 'assets/sounds/ampulPat.wav');
+        this.load.audio('anaTemaYavas', 'assets/sounds/anaTemaYavas.wav');
         // this.load.image("roomTileSet", "assets/maps/room/tileset.png");
         // this.load.tilemapTiledJSON('roomTilemap', "assets/maps/room/tilemap.json");
     }
     create() {
+        this.anaTemaYavas = this.sound.add('anaTemaYavas', { loop: true });
+        this.anaTemaYavas.play();
         this.alsetP = this.add.image(100, 250, 'alsetP').setDepth(-3);
         this.sisP = this.add.image(650, 250, 'momP').setDepth(-3);
         this.sisP = this.add.image(650, 250, 'sisP').setDepth(-3);
@@ -113,6 +116,7 @@ update() {
                 this.sisP.setDepth(-4);
                 break;
             case 9:
+                this.anaTemaYavas.stop();
                 this.scene.start('chapter6');
                 break;
         }

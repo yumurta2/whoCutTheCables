@@ -48,9 +48,9 @@ export class chapter6 extends Phaser.Scene {
         this.momP = this.add.image(-1000, 250, 'momP').setDepth(-3);
         this.powerBoxBroken = this.add.image(1000, 150, 'powerBoxBroken').setDepth(2).setScale(3);
         this.powerBoxFixed = this.add.image(-2000, 150, 'powerBoxFixed').setDepth(2).setScale(3);
-        this.electricEfect = this.physics.add.sprite(1000, 150, 'electricEfect').setDepth(14).setScale(3);
-        this.livingRoomDoor = this.add.image(600, 165, 'livingRoomDoor').setDepth(2);
-        this.kitchenDoor = this.add.image(1400, 165, 'kitchenDoor').setDepth(2);
+        this.electricEfect = this.physics.add.sprite(1000, 200, 'electricEfect').setDepth(14).setScale(4);
+        //this.livingRoomDoor = this.add.image(600, 165, 'livingRoomDoor').setDepth(2);
+        //this.kitchenDoor = this.add.image(1400, 165, 'kitchenDoor').setDepth(2);
 
         this.corridor = this.add.image(980, 150, 'corridor3').setDepth(1);
         this.game.canvas.style.cursor = "none";
@@ -63,6 +63,11 @@ export class chapter6 extends Phaser.Scene {
             key:'electricEfect',
             frames:this.anims.generateFrameNumbers('electricEfect', {start:0 , end:9}),
             frameRate: 8,
+        });
+        this.anims.create({
+            key:'electricEfect2',
+            frames:this.anims.generateFrameNumbers('electricEfect', {start:0 , end:9}),
+            frameRate: 16,
         });
         this.anims.create({
             key:'alsetIdleRight',
@@ -392,18 +397,19 @@ export class chapter6 extends Phaser.Scene {
             }
 
             
-        }else if(Phaser.Math.Distance.Between(this.alset.x, this.alset.y, this.livingRoomDoor.x, this.livingRoomDoor.y) < 50){
-            this.livingRoomDF(this.didFix);
-            if(Phaser.Input.Keyboard.JustDown(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE))){
-                this.livingRoomDLog = this.livingRoomDLog + 1;
-            }
         }
-        else if(Phaser.Math.Distance.Between(this.alset.x, this.alset.y, this.kitchenDoor.x, this.kitchenDoor.y) < 50){
-            this.kitchenDF();
-            if(Phaser.Input.Keyboard.JustDown(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE))){
-                this.kitchenDLog = this.kitchenDLog + 1;
-            }
-        }
+        // else if(Phaser.Math.Distance.Between(this.alset.x, this.alset.y, this.livingRoomDoor.x, this.livingRoomDoor.y) < 50){
+        //     this.livingRoomDF(this.didFix);
+        //     if(Phaser.Input.Keyboard.JustDown(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE))){
+        //         this.livingRoomDLog = this.livingRoomDLog + 1;
+        //     }
+        // }
+        // else if(Phaser.Math.Distance.Between(this.alset.x, this.alset.y, this.kitchenDoor.x, this.kitchenDoor.y) < 50){
+        //     this.kitchenDF();
+        //     if(Phaser.Input.Keyboard.JustDown(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE))){
+        //         this.kitchenDLog = this.kitchenDLog + 1;
+        //     }
+        // }
 
         else{
             this.text.setText('').setPosition(this.text.x,this.text.y);
@@ -422,7 +428,7 @@ export class chapter6 extends Phaser.Scene {
         } else {
             this.sis.anims.play('sisIdle',true);
         }
-        this.electricEfect.anims.play('electricEfect',true);
+        this.electricEfect.anims.play('electricEfect2',true);
         if(!this.dialogWithMom && !this.powerBox && !this.livingRoomD && !this.kitchenD ){
             this.updateMovement();
         }

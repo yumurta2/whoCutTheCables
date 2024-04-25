@@ -11,10 +11,13 @@ export class chapter0 extends Phaser.Scene {
         this.load.image('momP', 'assets/portraits/mom.png');
         this.load.audio('ampulAc', 'assets/sounds/ampulAc.wav');
         this.load.audio('ampulPat', 'assets/sounds/ampulPat.wav');
+        this.load.audio('MenuMusic', 'assets/sounds/MenuMusic.wav');
         // this.load.image("roomTileSet", "assets/maps/room/tileset.png");
         // this.load.tilemapTiledJSON('roomTilemap', "assets/maps/room/tilemap.json");
     }
     create() {
+        this.MenuMusic = this.sound.add('MenuMusic', { loop: true });
+        this.MenuMusic.play();
         this.alsetP = this.add.image(100, 250, 'alsetP').setDepth(-3);
         this.momP = this.add.image(650, 250, 'momP').setDepth(-3);
  
@@ -111,6 +114,7 @@ update() {
                 this.momP.setDepth(4);
                 break;
             case 9:
+                this.MenuMusic.stop();
                 this.scene.start('chapter1');
                 break;
         }
