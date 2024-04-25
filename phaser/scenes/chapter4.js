@@ -20,7 +20,8 @@ export class chapter4 extends Phaser.Scene {
         this.load.image('timeBarBg', 'assets/ui/timeBarBg.png');
         this.load.image('sisP', 'assets/portraits/sister.png');
         this.load.spritesheet('sis', 'assets/characters/sister/idleLeft32x64.png', { frameWidth: 32, frameHeight: 64 });
-
+        this.load.audio('anaTemaHizli', 'assets/sounds/anaTemaHizli.wav');
+        this.load.audio('anaTemaYavas', 'assets/sounds/anaTemaYavas.wav');
         // this.load.image("roomTileSet", "assets/maps/room/tileset.png");
         // this.load.tilemapTiledJSON('roomTilemap', "assets/maps/room/tilemap.json");
     }
@@ -36,6 +37,10 @@ export class chapter4 extends Phaser.Scene {
         //this.brighteningCircle[1].setDepth(13);
     }
     create() {
+        this.anaTemaHizli = this.sound.add('anaTemaHizli', { loop: true });
+        this.anaTemaYavas = this.sound.add('anaTemaYavas', { loop: true });
+
+        this.anaTemaHizli.play();
         this.alsetP = this.add.image(-1000, 250, 'alsetP').setDepth(-3);
         this.sisP = this.add.image(-1000, 250, 'sisP').setDepth(16);
 
@@ -93,6 +98,7 @@ export class chapter4 extends Phaser.Scene {
         this.timeBarBg = this.add.image(this.text.x-1000,this.text.y-200, 'timeBarBg').setDepth(15);
         this.timeBarFg = this.add.image(this.text.x-1000,this.text.y-200, 'timeBarFg').setDepth(16);
         this.currentHP = 100;
+        this.musicChange = false;
     }
     updateMovement(){
         if(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D).isDown && !this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A).isDown){
@@ -121,7 +127,11 @@ export class chapter4 extends Phaser.Scene {
                 break;
             case 1:
                 this.text.setText('Sis:\n\n  What are you doing?').setPosition(this.text.x,this.text.y);
-
+                if(this.musicChange == false){
+                    this.anaTemaHizli.stop();
+                    this.anaTemaYavas.play();
+                    this.musicChange = true;
+                }
                 this.powerBox = true;
                 this.sisP.x = this.text.x+400;
                 this.sis.x = 600;
@@ -131,9 +141,7 @@ export class chapter4 extends Phaser.Scene {
         }
     }
     update() { 
-        this.anaTemaHizli = this.sound.add('anaTemaHizli', { loop: true });
 
-        this.anaTemaHizli.play();
         if(this.coundown){
             if(this.currentHP>0){
                 this.currentHP -= 0.5;

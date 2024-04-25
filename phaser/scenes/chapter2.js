@@ -18,6 +18,7 @@ export class chapter2 extends Phaser.Scene {
         this.load.spritesheet('electricEfect', 'assets/objects/electricEfect19x29.png', { frameWidth: 19, frameHeight: 29 });
         this.load.image('timeBarFg', 'assets/ui/timeBarFg.png');
         this.load.image('timeBarBg', 'assets/ui/timeBarBg.png');
+        this.load.audio('anaTemaHizli', 'assets/sounds/anaTemaHizli.wav');
         // this.load.image("roomTileSet", "assets/maps/room/tileset.png");
         // this.load.tilemapTiledJSON('roomTilemap', "assets/maps/room/tilemap.json");
     }
@@ -33,6 +34,9 @@ export class chapter2 extends Phaser.Scene {
         //this.brighteningCircle[1].setDepth(13);
     }
     create() {
+        this.anaTemaHizli = this.sound.add('anaTemaHizli', { loop: true });
+
+        this.anaTemaHizli.play();
         this.alsetP = this.add.image(-1000, 250, 'alsetP').setDepth(-3);
         this.momP = this.add.image(-1000, 250, 'momP').setDepth(-3);
 
@@ -167,9 +171,7 @@ export class chapter2 extends Phaser.Scene {
         }
     }
     update() { 
-        this.anaTemaHizli = this.sound.add('anaTemaHizli', { loop: true });
 
-        this.anaTemaHizli.play();
         if(this.coundown){
             if(this.currentHP>0){
                 this.currentHP -= 0.5;
