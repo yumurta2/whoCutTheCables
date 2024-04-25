@@ -219,6 +219,7 @@ export class chapter3 extends Phaser.Scene {
                 this.text.setText('press SPACE to interact\n\nkitchen Door').setPosition(this.text.x,this.text.y);
                 break;
             case 1:
+                this.anaTemaHizli.stop();
                 this.scene.start('chapter4');
                 break;
             case 2:
@@ -351,6 +352,9 @@ export class chapter3 extends Phaser.Scene {
         }
     }
     update() { 
+        this.anaTemaHizli = this.sound.add('anaTemaHizli', { loop: true });
+
+        this.anaTemaHizli.play();
         if(this.coundown){
             if(this.currentHP>0){
                 this.currentHP -= 0.5;

@@ -131,6 +131,9 @@ export class chapter4 extends Phaser.Scene {
         }
     }
     update() { 
+        this.anaTemaHizli = this.sound.add('anaTemaHizli', { loop: true });
+
+        this.anaTemaHizli.play();
         if(this.coundown){
             if(this.currentHP>0){
                 this.currentHP -= 0.5;

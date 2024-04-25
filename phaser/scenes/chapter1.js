@@ -197,6 +197,7 @@ export class chapter1 extends Phaser.Scene {
                 break;
             case 1:
                 if(fix){
+                    this.anaTemaHizli.stop();
                     this.scene.start('chapter2');
                 }else {
                     this.livingRoomD = true;

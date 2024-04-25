@@ -158,6 +158,7 @@ export class chapter2 extends Phaser.Scene {
                 this.text.setText('H').setPosition(this.text.x,this.text.y);
                 break;
             case 14:
+                this.anaTemaHizli.stop();
                 this.scene.start('chapter3');
                 break;
 
@@ -166,6 +167,9 @@ export class chapter2 extends Phaser.Scene {
         }
     }
     update() { 
+        this.anaTemaHizli = this.sound.add('anaTemaHizli', { loop: true });
+
+        this.anaTemaHizli.play();
         if(this.coundown){
             if(this.currentHP>0){
                 this.currentHP -= 0.5;
