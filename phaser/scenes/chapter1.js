@@ -332,6 +332,7 @@ export class chapter1 extends Phaser.Scene {
                 this.timeBarFg.scaleX = this.currentHP / 100;
             }
             else{
+                this.anaTemaHizli.stop();
                 this.scene.start('youDied');
             }
         }
