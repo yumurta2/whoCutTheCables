@@ -24,7 +24,7 @@ export class youDied extends Phaser.Scene {
         this.alsetDied.anims.play('alsetDie', true);
         this.time.delayedCall(6000, () => {
             this.music.stop();
-            this.scene.start('opening');
+            this.scene.start('menu');
         });
 
     }

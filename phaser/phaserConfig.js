@@ -1,4 +1,4 @@
-import { opening } from './scenes/opening.js';
+
 import { menu } from './scenes/menu.js';
 import { chapter0 } from './scenes/chapter0.js';
 import { chapter1 } from './scenes/chapter1.js';
@@ -20,7 +20,11 @@ const config = {
             debug: false
         }
     },
-    scene: [opening,menu,chapter0,chapter1,chapter2,chapter3,chapter4,chapter5,chapter6,youDied,end],
+    scale: {
+        mode: Phaser.Scale.FIT,
+        autoCenter: Phaser.Scale.CENTER_BOTH
+      },
+    scene: [menu,chapter0,chapter1,chapter2,chapter3,chapter4,chapter5,chapter6,youDied,end],
     audio: {
         disableWebAudio: true,
         noAudio: false,
